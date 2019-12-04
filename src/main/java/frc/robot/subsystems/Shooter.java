@@ -18,10 +18,12 @@ import frc.robot.RobotMap;
 public class Shooter extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  DoubleSolenoid pitchSolenoid = null;
+  DoubleSolenoid pitchSolenoid1 = null;
+  DoubleSolenoid pitchSolenoid2 = null;
 
   public Shooter() {
-    pitchSolenoid = new DoubleSolenoid(RobotMap.SHOOTER_PITCH_SOLENOID_DEPLOY, RobotMap.SHOOTER_PITCH_SOLENOID_RETRACT);
+    pitchSolenoid1 = new DoubleSolenoid(RobotMap.SHOOTER_PITCH_SOLENOID1_DEPLOY, RobotMap.SHOOTER_PITCH_SOLENOID1_RETRACT);
+    pitchSolenoid2 = new DoubleSolenoid(RobotMap.SHOOTER_PITCH_SOLENOID2_DEPLOY, RobotMap.SHOOTER_PITCH_SOLENOID2_RETRACT);
   }
 
   @Override
@@ -31,10 +33,12 @@ public class Shooter extends Subsystem {
   }
 
   public void pitchUp() {
-    pitchSolenoid.set(Value.kForward);
+    pitchSolenoid1.set(Value.kForward);
+    pitchSolenoid2.set(Value.kForward);
   }
   
   public void pitchDown() {
-    pitchSolenoid.set(Value.kReverse);
+    pitchSolenoid1.set(Value.kReverse);
+    pitchSolenoid2.set(Value.kReverse);
   }
 }

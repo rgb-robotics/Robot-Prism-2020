@@ -20,8 +20,11 @@ public class RobotMap {
   // public static int leftMotor = 1;a
   // public static int rightMotor = 2;
 
-  public static final int SHOOTER_PITCH_SOLENOID_DEPLOY = 2;
-  public static final int SHOOTER_PITCH_SOLENOID_RETRACT = 3;
+  public static final int SHOOTER_PITCH_SOLENOID1_DEPLOY = 2;
+  public static final int SHOOTER_PITCH_SOLENOID1_RETRACT = 3;
+
+  public static final int SHOOTER_PITCH_SOLENOID2_DEPLOY = 4;
+  public static final int SHOOTER_PITCH_SOLENOID2_RETRACT = 5;
 
   public static int LeftFrontPort = 0;
   public static int LeftBackPort = 1;
