@@ -20,36 +20,26 @@ public class RobotMap {
   // public static int leftMotor = 1;a
   // public static int rightMotor = 2;
 
-  public static final int SHOOTER_PITCH_SOLENOID1_DEPLOY = 2;
-  public static final int SHOOTER_PITCH_SOLENOID1_RETRACT = 3;
 
-  public static final int SHOOTER_PITCH_SOLENOID2_DEPLOY = 4;
-  public static final int SHOOTER_PITCH_SOLENOID2_RETRACT = 5;
+  public static final int FeederSolenoid = 0;  
+  public static final int ShooterSolenoidPush = 1;
+  public static final int ShooterSolenoidPull = 2;
 
-  public static int LeftFrontPort = 0;
-  public static int LeftBackPort = 1;
-  public static int RightFrontPort = 2;
-  public static int RightBackPort = 3;
+  public static int RightAPort = 2;
+  public static int RightBPort = 3;
+  public static int RightCPort = 4;  
+  public static int LeftAPort = 5;
+  public static int LeftBPort = 6;
+  public static int LeftCPort = 7;  
 
-//lift
-  public static int LiftPort = 4;
+//intake 
+  public static int IntakePort = 0;
 
-//BallGrabber
-  public static int GrabbingInPort = 5;
-  public static int GrabbingOutPort = 6;
-
-//Rotator
-  public static int RotatorUp = 7;
-  public static int RotatorDown = 8;
+//feeder ports
+  public static int FeederA = 7;
+  public static int FeederB = 8;
 
 
-//Disc linear actuator
-  public static int DiscPort = 9;
-
-/*
-public static int DiscPort = 8;
-public static int RotatorDown = 9;
-*/
 
   public static int JoystickPort = 0;
 

@@ -22,12 +22,14 @@ public class DriveSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private Spark LeftFrontMotor = new Spark(RobotMap.LeftFrontPort);
-  private Spark LeftBackMotor = new Spark(RobotMap.LeftBackPort);
-  private Spark RightFrontMotor = new Spark(RobotMap.RightFrontPort);
-  private Spark RightBackMotor = new Spark(RobotMap.RightBackPort);
-  private SpeedControllerGroup LeftMotors = new SpeedControllerGroup(LeftFrontMotor, LeftBackMotor);
-  private SpeedControllerGroup RightMotors = new SpeedControllerGroup(RightFrontMotor, RightBackMotor);
+  private Spark RightAMotor = new Spark(RobotMap.RightAPort);
+  private Spark RightBMotor = new Spark(RobotMap.RightBPort);
+  private Spark RightCMotor = new Spark(RobotMap.RightCPort);
+  private Spark LeftAMotor = new Spark(RobotMap.LeftAPort);
+  private Spark LeftBMotor = new Spark(RobotMap.LeftBPort);
+  private Spark LeftCMotor = new Spark(RobotMap.LeftCPort);
+  private SpeedControllerGroup LeftMotors = new SpeedControllerGroup(LeftAMotor, LeftBMotor, LeftCMotor);
+  private SpeedControllerGroup RightMotors = new SpeedControllerGroup(RightAMotor, RightBMotor, RightCMotor);
   private DifferentialDrive drive = new DifferentialDrive(LeftMotors, RightMotors);
 
   public void teleopDrive(double move, double turn) {
