@@ -5,30 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
-import frc.robot.commands.LiftingLift;
-import edu.wpi.first.wpilibj.Spark;
-
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
 /**
  * Add your docs here.
  */
-public class Lift extends Subsystem {
- 
-public Spark Lift= new Spark(RobotMap.LiftPort);
-
-public void LiftUpPower(double LiftPower){
- 
-Lift.set(LiftPower);
-
-}
-
-  @Override
-  public void initDefaultCommand() {
-    setDefaultCommand(new LiftingLift());
-
+public class FeederStop_c extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public FeederStop_c() {
+    super();
+    requires(Robot.fStop);
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
+
+  // Called once when the command executes
+  @Override
+  protected void initialize() {
+    Robot.fStop.Stop();
+  }
+
 }

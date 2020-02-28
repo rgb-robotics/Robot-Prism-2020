@@ -7,23 +7,20 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class Shooter extends Subsystem {
+public class FeederStopper extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  DoubleSolenoid pitchSolenoid1 = null;
-  DoubleSolenoid pitchSolenoid2 = null;
+  Solenoid StopperSolenoid = null;
 
-  public Shooter() {
-    pitchSolenoid1 = new DoubleSolenoid(RobotMap.SHOOTER_PITCH_SOLENOID1_DEPLOY, RobotMap.SHOOTER_PITCH_SOLENOID1_RETRACT);
-    pitchSolenoid2 = new DoubleSolenoid(RobotMap.SHOOTER_PITCH_SOLENOID2_DEPLOY, RobotMap.SHOOTER_PITCH_SOLENOID2_RETRACT);
+  public FeederStopper() {
+    StopperSolenoid = new Solenoid(RobotMap.FeederSolenoidToggle);
   }
 
   @Override
@@ -32,13 +29,8 @@ public class Shooter extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void pitchUp() {
-    pitchSolenoid1.set(Value.kForward);
-    pitchSolenoid2.set(Value.kForward);
+  public void Stop() {
+    StopperSolenoid.set(true);
   }
   
-  public void pitchDown() {
-    pitchSolenoid1.set(Value.kReverse);
-    pitchSolenoid2.set(Value.kReverse);
-  }
 }

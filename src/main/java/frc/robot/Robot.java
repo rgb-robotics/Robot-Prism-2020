@@ -14,16 +14,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveSystem;
-import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.Rotator;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.DiscSystem;
-import frc.robot.commands.GrabbingBall;
-import frc.robot.commands.LiftingLift;
-import frc.robot.commands.RotatorCommand;
+import frc.robot.subsystems.FeederArm;
+import frc.robot.commands.Feeder_c;
 import frc.robot.commands.TeleopDrive;
-import frc.robot.commands.DiscCommand;
-import frc.robot.subsystems.BallGrabber;
+import frc.robot.subsystems.Feeder_m;
+import frc.robot.subsystems.FeederStopper;
 import edu.wpi.cscore.UsbCamera;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -39,12 +34,10 @@ import edu.wpi.cscore.CvSource;
  */
 public class Robot extends TimedRobot {
   public static DriveSystem RobotDrive= new DriveSystem();
-  public static BallGrabber Grabber = new BallGrabber();
-  public static Lift LiftUpDown = new Lift();
-  public static Rotator RotateUpDown = new Rotator();
-  public static DiscSystem DiscOut = new DiscSystem();
+  public static Feeder_m Feeder = new Feeder_m();
   public static OI oi;
-  public static Shooter m_shooter = null;
+  public static FeederArm arm = null;
+  public static FeederStopper fStop = null;
   
 
   Command  autonomousCommand;
@@ -56,13 +49,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_shooter = new Shooter();
+    arm = new FeederArm();
     oi = new OI();
      chooser.setDefaultOption("Default Auto", new TeleopDrive());
-     chooser.setDefaultOption("Default Auto", new GrabbingBall());
-     chooser.setDefaultOption("Default Auto", new LiftingLift());
-     chooser.setDefaultOption("Default Auto", new RotatorCommand());
-     chooser.setDefaultOption("Default Auto", new DiscCommand());
+     chooser.setDefaultOption("Default Auto", new Feeder_c());
     SmartDashboard.putData("Auto mode", chooser); 
     new Thread(() -> {
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();

@@ -9,35 +9,33 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.RotatorCommand;
+import frc.robot.commands.Feeder_c;
 import edu.wpi.first.wpilibj.Spark;
+
+
 
 /**
  * Add your docs here.
  */
-public class Rotator extends Subsystem {
 
-  public Spark RotatingUpwards= new Spark(RobotMap.RotatorUp);
-  public Spark RotatingDownwards = new Spark(RobotMap.RotatorDown);
+public class Feeder_m extends Subsystem {
 
-  public void RotatingUpwardsPower(double RotatingPower){
-    if(RotatingPower < 0){
-      RotatingPower = 0;
-    }
-    RotatingUpwards.set(RotatingPower);
-  }
+public Spark FeederA = new Spark(RobotMap.FeederA);
+public Spark FeederB = new Spark(RobotMap.FeederB);
+//public SpeedControllerGroup Grabbers = new SpeedControllerGroup(GrabbingIn, GrabbingOut);
 
-  public void RotatingDownwardsPower(double RotatingPower2){
-    if(RotatingPower2 > 0){
-      RotatingPower2 = 0;
-    }
-    RotatingDownwards.set(RotatingPower2);
-  }
+public void FeederInPower(double GrabbingR, double GrabbingL){
+    FeederA.set(GrabbingR - GrabbingL);
+}
+
+public void FeederOutPower(double GrabbingR, double GrabbingL){
+    FeederB.set(-(GrabbingR - GrabbingL));
+}
+
+
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new RotatorCommand());
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new Feeder_c());
   }
 }

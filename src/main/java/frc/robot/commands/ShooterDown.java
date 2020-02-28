@@ -19,7 +19,7 @@ public class ShooterDown extends InstantCommand {
    */
   public ShooterDown() {
     super();
-    requires(Robot.m_shooter);
+    requires(Robot.arm);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -27,7 +27,7 @@ public class ShooterDown extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.m_shooter.pitchDown();
+    Robot.arm.pitchDown();
   }
 
 }

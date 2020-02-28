@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LiftingLift extends Command {
-  public LiftingLift() {
+
+
+public class Feeder_c extends Command {
+  public Feeder_c() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.LiftUpDown);
+  requires(Robot.Feeder);
   }
 
   // Called just before this Command runs the first time
@@ -25,9 +27,10 @@ public class LiftingLift extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double Lift = Robot.oi.Controller.getY(Hand.kLeft);
-    Robot.LiftUpDown.LiftUpPower(Lift);
-
+    double FeederR = (Robot.oi.Controller.getTriggerAxis(Hand.kRight));
+    double FeederL = (Robot.oi.Controller.getTriggerAxis(Hand.kLeft));
+    Robot.Feeder.FeederInPower(FeederL, FeederR);
+    Robot.Feeder.FeederOutPower(FeederR, FeederL);
   }
 
   // Make this return true when this Command no longer needs to run execute()

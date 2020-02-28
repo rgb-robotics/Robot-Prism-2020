@@ -21,16 +21,18 @@ public class RobotMap {
   // public static int rightMotor = 2;
 
 
-  public static final int FeederSolenoid = 0;  
-  public static final int ShooterSolenoidPush = 1;
-  public static final int ShooterSolenoidPull = 2;
+  public static final int FeederSolenoidToggle = 0;  
+  public static final int ArmSolenoidPush = 1;
+  public static final int ArmSolenoidPull = 2;
 
-  public static int RightAPort = 2;
-  public static int RightBPort = 3;
-  public static int RightCPort = 4;  
-  public static int LeftAPort = 5;
-  public static int LeftBPort = 6;
-  public static int LeftCPort = 7;  
+//motor ports
+
+  public static int RightAPort = 1;
+  public static int RightBPort = 2;
+  public static int RightCPort = 3;  
+  public static int LeftAPort = 4;
+  public static int LeftBPort = 5;
+  public static int LeftCPort = 6;  
 
 //intake 
   public static int IntakePort = 0;

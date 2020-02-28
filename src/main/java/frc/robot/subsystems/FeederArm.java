@@ -7,35 +7,34 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.GrabbingBall;
-import edu.wpi.first.wpilibj.Spark;
-
-
 
 /**
  * Add your docs here.
  */
+public class FeederArm extends Subsystem {
+  // Put methods for controlling this subsystem
+  // here. Call these from Commands.
+  DoubleSolenoid ArmSolenoid = null;
 
-public class BallGrabber extends Subsystem {
-
-public Spark GrabbingRight = new Spark(RobotMap.GrabbingInPort);
-public Spark GrabbingLeft = new Spark(RobotMap.GrabbingOutPort);
-//public SpeedControllerGroup Grabbers = new SpeedControllerGroup(GrabbingIn, GrabbingOut);
-
-public void GrabberInPower(double GrabbingR, double GrabbingL){
-    GrabbingRight.set(GrabbingR - GrabbingL);
-}
-
-public void GrabberOutPower(double GrabbingR, double GrabbingL){
-  GrabbingLeft.set(-(GrabbingR - GrabbingL));
-}
-
-
+  public FeederArm() {
+    ArmSolenoid = new DoubleSolenoid(RobotMap.ArmSolenoidPush, RobotMap.ArmSolenoidPull);
+  }
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new GrabbingBall());
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
+  }
+
+  public void pitchUp() {
+    ArmSolenoid.set(Value.kForward);
+  }
+  
+  public void pitchDown() {
+    ArmSolenoid.set(Value.kReverse);
   }
 }
