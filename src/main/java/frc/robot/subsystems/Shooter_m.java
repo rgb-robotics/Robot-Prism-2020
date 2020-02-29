@@ -26,8 +26,8 @@ public TalonSRX ShooterB = new TalonSRX(8);
 
 public void shoot_v(boolean ShootYes){
   if(ShootYes == true){
-    ShooterA.set(ControlMode.PercentOutput, 0.6);
-    ShooterB.set(ControlMode.PercentOutput, 0.6);
+    ShooterA.set(ControlMode.PercentOutput, 0.7);
+    ShooterB.set(ControlMode.PercentOutput, -0.7);
   }
   else{
     ShooterA.set(ControlMode.PercentOutput, 0);
