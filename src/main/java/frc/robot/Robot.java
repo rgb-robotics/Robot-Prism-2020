@@ -54,9 +54,12 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     arm = new FeederArm();
     Robot.airCompressor.start();
-    if (Robot.airCompressor.getPressureSwitchValue() == true) {
+    if (Robot.airCompressor.getPressureSwitchValue() == true) { //getpressure is true when high
       Robot.airCompressor.stop();
     }
+    else if(Robot.airCompressor.getPressureSwitchValue() == false){
+      Robot.airCompressor.start();
+    } 
     oi = new OI();
      chooser.setDefaultOption("Default Auto", new TeleopDrive());
      chooser.setDefaultOption("Default Auto", new Feeder_c());

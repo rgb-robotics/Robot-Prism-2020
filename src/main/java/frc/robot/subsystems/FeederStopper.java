@@ -31,7 +31,12 @@ public class FeederStopper extends Subsystem {
   }
 
   public void Stop(boolean IntakeStopPiston) {
+    if(IntakeStopPiston == true){
     StopperSolenoid.set(true);
   }
+  else{
+    StopperSolenoid.set(false);
+  }
+}
   
 }
