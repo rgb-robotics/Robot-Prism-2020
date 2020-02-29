@@ -26,12 +26,12 @@ public Spark FeederB = new Spark(RobotMap.FeederB);
 
 public void feeder_v(boolean feederUp, boolean feederDown){
   if(feederUp == true && feederDown == false){
-    FeederA.set(0.2);
-    FeederB.set(-0.2);
+    FeederA.set(0.4);
+    FeederB.set(0.4);
   }
   else if(feederUp == false && feederDown == true){
-    FeederA.set(-0.2);
-    FeederB.set(0.2);
+    FeederA.set(-0.4);
+    FeederB.set(-0.4);
   }
   else{
     FeederA.set(0);

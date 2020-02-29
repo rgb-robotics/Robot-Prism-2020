@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
   public static FeederArm arm = null;
   public static FeederStopper fStop = null;
   
-  public static Compressor airCompressor = new Compressor();
+  public static Compressor airCompressor = new Compressor(0);
 
 
   Command  autonomousCommand;
@@ -54,6 +54,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     arm = new FeederArm();
     Robot.airCompressor.start();
+    if (Robot.airCompressor.getPressureSwitchValue() == true) {
+      Robot.airCompressor.stop();
+    }
     oi = new OI();
      chooser.setDefaultOption("Default Auto", new TeleopDrive());
      chooser.setDefaultOption("Default Auto", new Feeder_c());

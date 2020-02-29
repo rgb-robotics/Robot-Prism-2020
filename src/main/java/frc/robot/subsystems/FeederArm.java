@@ -35,10 +35,10 @@ public class FeederArm extends Subsystem {
 
     public void Intake_v(boolean IntakeUp, boolean IntakeDown){
       if(IntakeUp == true && IntakeDown == false){
-        ArmSolenoid.set(Value.kReverse);
+        ArmSolenoid.set(Value.kForward);
       }
       else if(IntakeUp == false && IntakeDown == true){
-        ArmSolenoid.set(Value.kForward);
+        ArmSolenoid.set(Value.kReverse);
       }
       else{
       }
@@ -48,6 +48,9 @@ public class FeederArm extends Subsystem {
   public void Intake_g(boolean IntakeGo){
     if(IntakeGo == true){
     IntakeMotor.set(0.8); 
+    }
+    else{
+      IntakeMotor.set(0);
     }
 }  
 }
