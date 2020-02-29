@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
+
 /**
  * Add your docs here.
  */
@@ -19,7 +20,7 @@ public class FeederStopper extends Subsystem {
   // here. Call these from Commands.
   Solenoid StopperSolenoid = null;
 
-  public FeederStopper() {
+  public FeederStopper(){
     StopperSolenoid = new Solenoid(RobotMap.FeederSolenoidToggle);
   }
 
@@ -29,7 +30,7 @@ public class FeederStopper extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void Stop() {
+  public void Stop(boolean IntakeStopPiston) {
     StopperSolenoid.set(true);
   }
   

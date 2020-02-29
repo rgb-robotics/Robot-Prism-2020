@@ -26,8 +26,10 @@ public class FeederStop_c extends InstantCommand {
 
   // Called once when the command executes
   @Override
-  protected void initialize() {
-    Robot.fStop.Stop();
+  protected void execute() {
+    final boolean IntakeStopPiston = Robot.oi.stick.getTrigger();
+
+    Robot.fStop.Stop(IntakeStopPiston);
   }
 
 }

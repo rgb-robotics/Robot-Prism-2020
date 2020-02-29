@@ -24,13 +24,21 @@ public Spark FeederA = new Spark(RobotMap.FeederA);
 public Spark FeederB = new Spark(RobotMap.FeederB);
 //public SpeedControllerGroup Grabbers = new SpeedControllerGroup(GrabbingIn, GrabbingOut);
 
-public void FeederInPower(double GrabbingR, double GrabbingL){
-    FeederA.set(GrabbingR - GrabbingL);
+public void feeder_v(boolean feederUp, boolean feederDown){
+  if(feederUp == true && feederDown == false){
+    FeederA.set(0.4);
+    FeederB.set(-0.4);
+  }
+  else if(feederUp == false && feederDown == true){
+    FeederA.set(-0.4);
+    FeederB.set(0.4);
+  }
+  else{
+    FeederA.set(0);
+    FeederB.set(0);
+  }
 }
 
-public void FeederOutPower(double GrabbingR, double GrabbingL){
-    FeederB.set(-(GrabbingR - GrabbingL));
-}
 
 
 

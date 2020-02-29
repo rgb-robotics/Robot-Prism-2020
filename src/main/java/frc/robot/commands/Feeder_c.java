@@ -6,10 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.GenericHID;
 
 
 
@@ -27,10 +26,24 @@ public class Feeder_c extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double FeederR = (Robot.oi.Controller.getTriggerAxis(Hand.kRight));
-    double FeederL = (Robot.oi.Controller.getTriggerAxis(Hand.kLeft));
-    Robot.Feeder.FeederInPower(FeederL, FeederR);
-    Robot.Feeder.FeederOutPower(FeederR, FeederL);
+
+	  final boolean IntakeUp = Robot.oi.Controller.getBumper(GenericHID.Hand.kRight);
+    boolean IntakeDown;
+    if(Robot.oi.Controller.getTriggerAxis(GenericHID.Hand.kRight)>0.2){
+      IntakeDown = true;
+    }
+    else{
+      IntakeDown = false;
+    }
+    Robot.arm.Intake_v(IntakeUp, IntakeDown);
+    final boolean IntakeGo = Robot.oi.Controller.getAButton();
+
+    Robot.arm.Intake_g(IntakeGo);
+
+    final boolean feederUp = Robot.oi.stick.getRawButton(4);
+    final boolean feederDown = Robot.oi.stick.getRawButton(3);
+
+    Robot.Feeder.feeder_v(feederUp, feederDown);
   }
 
   // Make this return true when this Command no longer needs to run execute()

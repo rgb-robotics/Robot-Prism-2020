@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ShooterDown;
-import frc.robot.commands.ShooterUp;
+
 
 
 /**
@@ -29,12 +28,14 @@ public class OI {
 
   public XboxController Controller = new XboxController(RobotMap.XboxControllerPort);
 
+
+
   Button D7 = new JoystickButton(stick, 7);
   Button D8 = new JoystickButton(stick, 8);
 
+
   public OI(){
-    D7.whenPressed(new ShooterUp());
-    D8.whenPressed(new ShooterDown());
+    
   }
 
 

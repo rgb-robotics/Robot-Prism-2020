@@ -24,6 +24,7 @@ import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
+import edu.wpi.first.wpilibj.Compressor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,6 +40,8 @@ public class Robot extends TimedRobot {
   public static FeederArm arm = null;
   public static FeederStopper fStop = null;
   
+  public static Compressor airCompressor = new Compressor();
+
 
   Command  autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -50,6 +53,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     arm = new FeederArm();
+    Robot.airCompressor.start();
     oi = new OI();
      chooser.setDefaultOption("Default Auto", new TeleopDrive());
      chooser.setDefaultOption("Default Auto", new Feeder_c());
