@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.Feeder_c;
 import edu.wpi.first.wpilibj.Spark;
 
 
@@ -21,9 +22,11 @@ public class FeederArm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   DoubleSolenoid ArmSolenoid = null;
+  DoubleSolenoid StopperSolenoid = null;
   public Spark IntakeMotor = new Spark(RobotMap.IntakePort);
-  public FeederArm() {
+  public FeederArm(){
     ArmSolenoid = new DoubleSolenoid(RobotMap.ArmSolenoidPush, RobotMap.ArmSolenoidPull);
+    StopperSolenoid = new DoubleSolenoid(RobotMap.StopperSolenoidPush, RobotMap.StopperSolenoidPull);
   }
 
   @Override
@@ -34,15 +37,25 @@ public class FeederArm extends Subsystem {
 
   public void Intake_v(boolean IntakeUp, boolean IntakeDown){
     if(IntakeUp == true && IntakeDown == false){
-      ArmSolenoid.set(Value.kReverse);      }
+      ArmSolenoid.set(Value.kReverse);      
+    }
     else if(IntakeUp == false && IntakeDown == true){
       ArmSolenoid.set(Value.kForward);
     }
     else{
     }
+    }
 
-  
-}
+    public void Stop(boolean StopperUp, boolean StopperDown){
+      if(StopperUp == true && StopperDown == false){
+        StopperSolenoid.set(Value.kReverse);      
+      }
+      else if(StopperUp == false && StopperDown == true){
+        StopperSolenoid.set(Value.kForward);
+      }
+      else{
+      }
+}    
   public void Intake_g(boolean IntakeGo){
     if(IntakeGo == true){
     IntakeMotor.set(0.8); 

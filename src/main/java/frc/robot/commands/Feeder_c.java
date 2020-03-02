@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -36,7 +37,16 @@ public class Feeder_c extends Command {
       IntakeDown = false;
     }
     Robot.arm.Intake_v(IntakeUp, IntakeDown);
-
+    final boolean StopperDown = Robot.oi.Controller.getBumper(GenericHID.Hand.kLeft);
+    boolean StopperUp;
+    if(Robot.oi.Controller.getTriggerAxis(GenericHID.Hand.kLeft)>0.2){
+      StopperUp = true;
+    }
+    else{
+      StopperUp = false;
+    }
+    Robot.arm.Stop(StopperUp, StopperDown);
+    
     
     final boolean IntakeGo = Robot.oi.Controller.getAButton();
     Robot.arm.Intake_g(IntakeGo);

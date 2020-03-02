@@ -20,10 +20,10 @@ public class RobotMap {
   // public static int leftMotor = 1;a
   // public static int rightMotor = 2;
     
-  public static final int ArmSolenoidPush = 2;
-  public static final int ArmSolenoidPull = 3;
-  public static final int StopperSolenoidPush = 0;
-  public static final int StopperSolenoidPull = 1;
+  public static final int ArmSolenoidPush = 0;
+  public static final int ArmSolenoidPull = 1;
+  public static final int StopperSolenoidPush = 2;
+  public static final int StopperSolenoidPull = 3;
 
 //motor ports
 

@@ -19,7 +19,6 @@ import frc.robot.commands.Feeder_c;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.subsystems.Feeder_m;
 import frc.robot.subsystems.Shooter_m;
-import frc.robot.subsystems.FeederStopper;
 import edu.wpi.cscore.UsbCamera;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -35,11 +34,11 @@ import edu.wpi.first.wpilibj.Compressor;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveSystem RobotDrive= new DriveSystem();
+  public static DriveSystem RobotDrive = new DriveSystem();
   public static Feeder_m Feeder = new Feeder_m();
   public static OI oi;
   public static FeederArm arm = null;
-  public static FeederStopper fStop = null;
+  //public static FeederStopper fStop = null; 
   public static Shooter_m shoot = null;
   
   public static Compressor airCompressor = new Compressor(0);
@@ -56,12 +55,13 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     arm = new FeederArm();
     shoot = new Shooter_m();
-    fStop = new FeederStopper();
+    //fStop = new FeederStopper();
     Robot.airCompressor.start();
  
     oi = new OI();
-     chooser.setDefaultOption("Default Auto", new TeleopDrive());
-     chooser.setDefaultOption("Default Auto", new Feeder_c());
+     chooser.setDefaultOption("Default Drive", new TeleopDrive());
+     chooser.setDefaultOption("Default Feeder", new Feeder_c());
+     //chooser.setDefaultOption("Default Feeder Stopper", new FeederStop_c());
     SmartDashboard.putData("Auto mode", chooser); 
     new Thread(() -> {
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
