@@ -32,34 +32,12 @@ public class Shooting_c extends Command {
     
     public void execute()
     {
-      boolean toggleOn = false;
-      boolean togglePressed = false;
-      final boolean ShootYes = Robot.oi.Controller.getBButton();
-    Robot.shoot.shoot_v(ShootYes);
-      /*while (toggleOn = false){
-        if (Robot.oi.Controller.getBButton()){
-              toggleOn = true;
-              togglePressed = true;
-              Robot.shoot.shoot_v(toggleOn = true);
-          }
-      while (toggleOn = true){
-        if (Robot.oi.Controller.getBButton()){
-              toggleOn = false;
-              togglePressed = false;
-              Robot.shoot.shoot_v(toggleOn = false);
-        }
-      }*/
-      /*if (Robot.oi.Controller.getBButton()){
-          if (toggleOn = false)
-                toggleOn = true;
-                togglePressed = true;
-                Robot.shoot.shoot_v(toggleOn = true);
-            }
-        if (Robot.oi.Controller.getBButton()){
-          if (toggleOn = true)
-                toggleOn = false;
-                togglePressed = false;
-                Robot.shoot.shoot_v(toggleOn = false);*/
+      boolean ShootYes = false;
+    
+      if (Robot.oi.Controller.getBButtonPressed() == true){
+        ShootYes = !ShootYes;
+        Robot.shoot.shoot_v(ShootYes);
+      }
         }        
         
 

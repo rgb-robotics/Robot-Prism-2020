@@ -37,19 +37,21 @@ public class Feeder_c extends Command {
       IntakeDown = false;
     }
     Robot.arm.Intake_v(IntakeUp, IntakeDown);
-    final boolean StopperDown = Robot.oi.Controller.getBumper(GenericHID.Hand.kLeft);
-    boolean StopperUp;
-    if(Robot.oi.Controller.getTriggerAxis(GenericHID.Hand.kLeft)>0.2){
-      StopperUp = true;
-    }
-    else{
-      StopperUp = false;
-    }
-    Robot.arm.Stop(StopperUp, StopperDown);
+    boolean StopperUp = false;
+    if (Robot.oi.stick.getTriggerPressed() == true){
+      StopperUp = !StopperUp;
+      Robot.arm.Stop(StopperUp);
+    };
+
+
     
+boolean IntakeGo = false;
     
-    final boolean IntakeGo = Robot.oi.Controller.getAButton();
-    Robot.arm.Intake_g(IntakeGo);
+    if (Robot.oi.Controller.getAButtonPressed() == true){
+      IntakeGo = !IntakeGo;
+      Robot.arm.Intake_g(IntakeGo);
+    }
+
     final boolean feederUp = Robot.oi.stick.getRawButton(4);
     final boolean feederDown = Robot.oi.stick.getRawButton(3);
 

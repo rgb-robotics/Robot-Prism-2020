@@ -46,12 +46,9 @@ public class FeederArm extends Subsystem {
     }
     }
 
-    public void Stop(boolean StopperUp, boolean StopperDown){
-      if(StopperUp == true && StopperDown == false){
-        StopperSolenoid.set(Value.kReverse);      
-      }
-      else if(StopperUp == false && StopperDown == true){
-        StopperSolenoid.set(Value.kForward);
+    public void Stop(boolean StopperUp){
+      if(StopperUp == true){
+        StopperSolenoid.set(Value.kReverse);  
       }
       else{
       }
