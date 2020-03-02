@@ -32,8 +32,7 @@ public class OI {
 
   Button D7 = new JoystickButton(stick, 7);
   Button D8 = new JoystickButton(stick, 8);
-
-
+  
   public OI(){
     
   }

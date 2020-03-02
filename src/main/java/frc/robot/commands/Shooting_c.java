@@ -6,7 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.OI;
 import frc.robot.Robot;
 
 
@@ -24,12 +26,42 @@ public class Shooting_c extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-
-	final boolean ShootYes = Robot.oi.Controller.getBButton();
+  /*protected void execute() {
+    boolean toggleOn = false;
+    boolean togglePressed = Robot.oi.Controller.getBButton();*/
+    
+    public void execute()
+    {
+      boolean toggleOn = false;
+      boolean togglePressed = false;
+      final boolean ShootYes = Robot.oi.Controller.getBButton();
     Robot.shoot.shoot_v(ShootYes);
-
-  }
+      /*while (toggleOn = false){
+        if (Robot.oi.Controller.getBButton()){
+              toggleOn = true;
+              togglePressed = true;
+              Robot.shoot.shoot_v(toggleOn = true);
+          }
+      while (toggleOn = true){
+        if (Robot.oi.Controller.getBButton()){
+              toggleOn = false;
+              togglePressed = false;
+              Robot.shoot.shoot_v(toggleOn = false);
+        }
+      }*/
+      /*if (Robot.oi.Controller.getBButton()){
+          if (toggleOn = false)
+                toggleOn = true;
+                togglePressed = true;
+                Robot.shoot.shoot_v(toggleOn = true);
+            }
+        if (Robot.oi.Controller.getBButton()){
+          if (toggleOn = true)
+                toggleOn = false;
+                togglePressed = false;
+                Robot.shoot.shoot_v(toggleOn = false);*/
+        }        
+        
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -47,4 +79,5 @@ public class Shooting_c extends Command {
   @Override
   protected void interrupted() {
   }
+  
 }

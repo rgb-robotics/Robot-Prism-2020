@@ -36,10 +36,10 @@ public class Feeder_c extends Command {
       IntakeDown = false;
     }
     Robot.arm.Intake_v(IntakeUp, IntakeDown);
+
+    
     final boolean IntakeGo = Robot.oi.Controller.getAButton();
-
     Robot.arm.Intake_g(IntakeGo);
-
     final boolean feederUp = Robot.oi.stick.getRawButton(4);
     final boolean feederDown = Robot.oi.stick.getRawButton(3);
 

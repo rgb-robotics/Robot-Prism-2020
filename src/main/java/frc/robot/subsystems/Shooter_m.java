@@ -24,10 +24,10 @@ public TalonSRX ShooterA = new TalonSRX(7);
 public TalonSRX ShooterB = new TalonSRX(8);
 //public SpeedControllerGroup Grabbers = new SpeedControllerGroup(GrabbingIn, GrabbingOut);
 
-public void shoot_v(boolean ShootYes){
-  if(ShootYes == true){
-    ShooterA.set(ControlMode.PercentOutput, 1);
-    ShooterB.set(ControlMode.PercentOutput, -1);
+public void shoot_v(boolean toggleOn){
+  if(toggleOn == true){
+    ShooterA.set(ControlMode.PercentOutput, 8.5);
+    ShooterB.set(ControlMode.PercentOutput, -8.5);
   }
   else{
     ShooterA.set(ControlMode.PercentOutput, 0);

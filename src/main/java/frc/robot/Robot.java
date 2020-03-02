@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.FeederArm;
 import frc.robot.commands.Feeder_c;
-import frc.robot.commands.Shooting_c;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.subsystems.Feeder_m;
 import frc.robot.subsystems.Shooter_m;
@@ -57,6 +56,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     arm = new FeederArm();
     shoot = new Shooter_m();
+    fStop = new FeederStopper();
     Robot.airCompressor.start();
  
     oi = new OI();

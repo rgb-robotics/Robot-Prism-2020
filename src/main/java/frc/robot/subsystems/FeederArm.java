@@ -22,7 +22,6 @@ public class FeederArm extends Subsystem {
   // here. Call these from Commands.
   DoubleSolenoid ArmSolenoid = null;
   public Spark IntakeMotor = new Spark(RobotMap.IntakePort);
-
   public FeederArm() {
     ArmSolenoid = new DoubleSolenoid(RobotMap.ArmSolenoidPush, RobotMap.ArmSolenoidPull);
   }
@@ -33,15 +32,14 @@ public class FeederArm extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-    public void Intake_v(boolean IntakeUp, boolean IntakeDown){
-      if(IntakeUp == true && IntakeDown == false){
-        ArmSolenoid.set(Value.kForward);
-      }
-      else if(IntakeUp == false && IntakeDown == true){
-        ArmSolenoid.set(Value.kReverse);
-      }
-      else{
-      }
+  public void Intake_v(boolean IntakeUp, boolean IntakeDown){
+    if(IntakeUp == true && IntakeDown == false){
+      ArmSolenoid.set(Value.kReverse);      }
+    else if(IntakeUp == false && IntakeDown == true){
+      ArmSolenoid.set(Value.kForward);
+    }
+    else{
+    }
 
   
 }
