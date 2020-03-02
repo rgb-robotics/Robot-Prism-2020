@@ -27,8 +27,12 @@ public class TeleopDrive extends Command {
 
     double move = -Robot.oi.stick.getY();
     double turn = Robot.oi.stick.getX();
-  
-    Robot.RobotDrive.teleopDrive(move, turn);
+
+    double throttle = Robot.oi.stick.getThrottle();
+    double scale = 1;
+
+    scale = (-0.125*(throttle))+0.675;    
+    Robot.RobotDrive.teleopDrive(move, turn, scale);
 
   }
 

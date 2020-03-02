@@ -22,6 +22,8 @@ public class DriveSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  
+
   private Spark RightAMotor = new Spark(RobotMap.RightAPort);
   private Spark RightBMotor = new Spark(RobotMap.RightBPort);
   private Spark RightCMotor = new Spark(RobotMap.RightCPort);
@@ -32,10 +34,11 @@ public class DriveSystem extends Subsystem {
   private SpeedControllerGroup RightMotors = new SpeedControllerGroup(RightAMotor, RightBMotor, RightCMotor);
   private DifferentialDrive drive = new DifferentialDrive(LeftMotors, RightMotors);
 
-  public void teleopDrive(double move, double turn) {
+  public void teleopDrive(double move, double turn, double scale) {
     //If you want to change the limit of the speed of the drive base
     //Just change the value of these
     //0.5 means 50% 1 means 100% of top speed, 0.7 means 70%
+    /*
     if(move > 0.8 ){
       move = 0.8;
     }
@@ -51,12 +54,15 @@ public class DriveSystem extends Subsystem {
 
     if(move < -0.8){
          move = -0.8;
-    }
+    */
 
+  double move2 = move * scale;
+  double turn2 = turn * scale;
     
     
-    drive.arcadeDrive(move, turn);
-  } 
+    drive.arcadeDrive(move2, turn2);
+  
+}
 
   @Override
   public void initDefaultCommand() {

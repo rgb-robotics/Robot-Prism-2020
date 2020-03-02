@@ -51,6 +51,7 @@ public class FeederArm extends Subsystem {
         StopperSolenoid.set(Value.kReverse);  
       }
       else{
+        StopperSolenoid.set(Value.kForward);
       }
 }    
   public void Intake_g(boolean IntakeGo){

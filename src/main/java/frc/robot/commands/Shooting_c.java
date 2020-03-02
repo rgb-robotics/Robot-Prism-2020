@@ -6,22 +6,28 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.XboxController;
+
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 import frc.robot.Robot;
 
 
 
 public class Shooting_c extends Command {
-  public Shooting_c() {
+  boolean ShootYes = false;
+public Shooting_c() {
+  
+
     // Use requires() here to declare subsystem dependencies
   requires(Robot.shoot);
+  
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
+
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -30,14 +36,13 @@ public class Shooting_c extends Command {
     boolean toggleOn = false;
     boolean togglePressed = Robot.oi.Controller.getBButton();*/
     
-    public void execute()
-    {
-      boolean ShootYes = false;
+    public void execute() {
     
-      if (Robot.oi.Controller.getBButtonPressed() == true){
+
+      if (Robot.oi.Controller.getRawButtonPressed(2)) {
         ShootYes = !ShootYes;
-        Robot.shoot.shoot_v(ShootYes);
       }
+      Robot.shoot.shoot_v(ShootYes);
         }        
         
 

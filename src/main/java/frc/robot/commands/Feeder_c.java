@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 
 
 public class Feeder_c extends Command {
+  boolean StopperUp = false;
+  boolean IntakeGo = true;
   public Feeder_c() {
     // Use requires() here to declare subsystem dependencies
   requires(Robot.Feeder);
@@ -37,17 +39,17 @@ public class Feeder_c extends Command {
       IntakeDown = false;
     }
     Robot.arm.Intake_v(IntakeUp, IntakeDown);
-    boolean StopperUp = false;
-    if (Robot.oi.stick.getTriggerPressed() == true){
+
+    if (Robot.oi.Controller.getRawButton(3)){
       StopperUp = !StopperUp;
       Robot.arm.Stop(StopperUp);
     };
 
 
     
-boolean IntakeGo = false;
+
     
-    if (Robot.oi.Controller.getAButtonPressed() == true){
+    if (Robot.oi.Controller.getRawButtonPressed(1)){
       IntakeGo = !IntakeGo;
       Robot.arm.Intake_g(IntakeGo);
     }
