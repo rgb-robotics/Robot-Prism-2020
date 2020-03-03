@@ -10,12 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Timer;
 
 
 
 public class Feeder_c extends Command {
   boolean StopperUp = false;
   boolean IntakeGo = true;
+  double latest;
+  double debounce_period = 0.6;
   public Feeder_c() {
     // Use requires() here to declare subsystem dependencies
   requires(Robot.Feeder);
@@ -29,7 +32,7 @@ public class Feeder_c extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    double now = Timer.getFPGATimestamp();
 	  final boolean IntakeUp = Robot.oi.Controller.getBumper(GenericHID.Hand.kRight);
     boolean IntakeDown;
     if(Robot.oi.Controller.getTriggerAxis(GenericHID.Hand.kRight)>0.2){
@@ -40,14 +43,14 @@ public class Feeder_c extends Command {
     }
     Robot.arm.Intake_v(IntakeUp, IntakeDown);
 
-    if (Robot.oi.Controller.getRawButton(3)){
-      StopperUp = !StopperUp;
+    if (Robot.oi.stick.getRawButton(1)){
+      if((now-latest) > debounce_period){
+        latest = now;
+        StopperUp = !StopperUp;
       Robot.arm.Stop(StopperUp);
+    }
+      ;
     };
-
-
-    
-
     
     if (Robot.oi.Controller.getRawButtonPressed(1)){
       IntakeGo = !IntakeGo;
