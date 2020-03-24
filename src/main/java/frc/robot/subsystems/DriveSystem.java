@@ -11,9 +11,12 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleopDrive;
 
+
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  * Add your docs here.
@@ -33,8 +36,12 @@ public class DriveSystem extends Subsystem {
   private SpeedControllerGroup LeftMotors = new SpeedControllerGroup(LeftAMotor, LeftBMotor, LeftCMotor);
   private SpeedControllerGroup RightMotors = new SpeedControllerGroup(RightAMotor, RightBMotor, RightCMotor);
   private DifferentialDrive drive = new DifferentialDrive(LeftMotors, RightMotors);
+ 
+  private Encoder leftEncoder = new Encoder(1, 2, false, EncodingType.k4X);
+  public static final double kDistancePerPulse = 18.84/1024;
 
   public void teleopDrive(double move, double turn, double scale) {
+    
     //If you want to change the limit of the speed of the drive base
     //Just change the value of these
     //0.5 means 50% 1 means 100% of top speed, 0.7 means 70%
@@ -68,5 +75,14 @@ public class DriveSystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new TeleopDrive());
+  }
+  public void autonomous() {
+    leftEncoder.setDistancePerPulse(kDistancePerPulse);
+    leftEncoder.reset();
+    if (leftEncoder.getDistance() < 50) {
+      drive.arcadeDrive(0.5, 0);
+    }else {
+      drive.arcadeDrive(0, 0);
+    }
   }
 }
