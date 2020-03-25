@@ -18,7 +18,6 @@ import frc.robot.subsystems.FeederArm;
 import frc.robot.commands.Feeder_c;
 import frc.robot.commands.TeleopDrive;
 import frc.robot.subsystems.Feeder_m;
-import frc.robot.subsystems.Shooter_m;
 import edu.wpi.cscore.UsbCamera;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -39,7 +38,6 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static FeederArm arm = null;
   //public static FeederStopper fStop = null; 
-  public static Shooter_m shoot = null;
   
   public static Compressor airCompressor = new Compressor(0);
 
@@ -54,7 +52,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     arm = new FeederArm();
-    shoot = new Shooter_m();
     //fStop = new FeederStopper();
     Robot.airCompressor.start();
  

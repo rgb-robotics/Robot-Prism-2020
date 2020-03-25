@@ -38,35 +38,22 @@ public class DriveSystem extends Subsystem {
   private DifferentialDrive drive = new DifferentialDrive(LeftMotors, RightMotors);
  
   private Encoder leftEncoder = new Encoder(1, 2, false, EncodingType.k4X);
-  public static final double kDistancePerPulse = 18.84/1024;
-
+  public static final double kDistancePerPulse = 50/256; 
+  public double distance = leftEncoder.getDistance();
+    
   public void teleopDrive(double move, double turn, double scale) {
     
-    //If you want to change the limit of the speed of the drive base
-    //Just change the value of these
-    //0.5 means 50% 1 means 100% of top speed, 0.7 means 70%
-    /*
-    if(move > 0.8 ){
-      move = 0.8;
-    }
+
+    double move2 = move * scale;
+    double turn2 = turn * scale;
+
+    System.out.println(distance);
     
-
-    if(turn > 0.7 ){
-      turn = 0.7;
-    }
-
-    if(turn < -0.7){
-      turn = -0.7;
-    }
-
-    if(move < -0.8){
-         move = -0.8;
-    */
-
-  double move2 = move * scale;
-  double turn2 = turn * scale;
-    
-    
+    if (distance < 50) {
+      move2 = 0.5;
+    }else {
+      move2 = 0;
+    }  
     drive.arcadeDrive(move2, turn2);
   
 }
@@ -75,8 +62,12 @@ public class DriveSystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new TeleopDrive());
+    
+    leftEncoder.setDistancePerPulse(kDistancePerPulse);
+    leftEncoder.reset();
   }
-  public void autonomous() {
+  
+  /*public void autonomous() {
     leftEncoder.setDistancePerPulse(kDistancePerPulse);
     leftEncoder.reset();
     if (leftEncoder.getDistance() < 50) {
@@ -84,5 +75,5 @@ public class DriveSystem extends Subsystem {
     }else {
       drive.arcadeDrive(0, 0);
     }
-  }
+  }*/
 }

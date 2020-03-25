@@ -24,7 +24,7 @@ public class TeleopDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*
+    
     double move = -Robot.oi.stick.getY();
     double turn = Robot.oi.stick.getX();
 
@@ -34,7 +34,7 @@ public class TeleopDrive extends Command {
     
     scale = (-0.13*(throttle))+0.67;    
     Robot.RobotDrive.teleopDrive(move, turn, scale);
-*/  
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
