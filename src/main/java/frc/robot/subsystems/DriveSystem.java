@@ -27,53 +27,50 @@ public class DriveSystem extends Subsystem {
 
   
 
-  private Spark RightAMotor = new Spark(RobotMap.RightAPort);
-  private Spark RightBMotor = new Spark(RobotMap.RightBPort);
-  private Spark RightCMotor = new Spark(RobotMap.RightCPort);
-  private Spark LeftAMotor = new Spark(RobotMap.LeftAPort);
-  private Spark LeftBMotor = new Spark(RobotMap.LeftBPort);
-  private Spark LeftCMotor = new Spark(RobotMap.LeftCPort);
-  private SpeedControllerGroup LeftMotors = new SpeedControllerGroup(LeftAMotor, LeftBMotor, LeftCMotor);
-  private SpeedControllerGroup RightMotors = new SpeedControllerGroup(RightAMotor, RightBMotor, RightCMotor);
-  private DifferentialDrive drive = new DifferentialDrive(LeftMotors, RightMotors);
- 
-  private Encoder leftEncoder = new Encoder(1, 2, false, EncodingType.k4X);
-  public static final double kDistancePerPulse = 50/256; 
-  public double distance = leftEncoder.getDistance();
-    
+  private static Spark RightAMotor = new Spark(RobotMap.RightAPort);
+  private static Spark RightBMotor = new Spark(RobotMap.RightBPort);
+  private static Spark RightCMotor = new Spark(RobotMap.RightCPort);
+  private static Spark LeftAMotor = new Spark(RobotMap.LeftAPort);
+  private static Spark LeftBMotor = new Spark(RobotMap.LeftBPort);
+  private static Spark LeftCMotor = new Spark(RobotMap.LeftCPort);
+  private static SpeedControllerGroup LeftMotors = new SpeedControllerGroup(LeftAMotor, LeftBMotor, LeftCMotor);
+  private static SpeedControllerGroup RightMotors = new SpeedControllerGroup(RightAMotor, RightBMotor, RightCMotor);
+  private static DifferentialDrive drive = new DifferentialDrive(LeftMotors, RightMotors);
+
+  private static Encoder leftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
+
   public void teleopDrive(double move, double turn, double scale) {
-    
 
     double move2 = move * scale;
     double turn2 = turn * scale;
 
-    System.out.println(distance);
-    
-    if (distance < 50) {
+    /*System.out.println(leftEncoder.getDistance());
+
+    if (leftEncoder.getDistance() < 50) {
       move2 = 0.5;
-    }else {
+    } else {
       move2 = 0;
-    }  
+    }*/
     drive.arcadeDrive(move2, turn2);
-  
-}
+
+  }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new TeleopDrive());
-    
-    leftEncoder.setDistancePerPulse(kDistancePerPulse);
-    leftEncoder.reset();
+
+    leftEncoder.setDistancePerPulse(1 / 256);
+    //leftEncoder.reset();
   }
-  
-  /*public void autonomous() {
-    leftEncoder.setDistancePerPulse(kDistancePerPulse);
-    leftEncoder.reset();
-    if (leftEncoder.getDistance() < 50) {
+
+  public static void autonomous() {
+    System.out.println(leftEncoder.getDistance());
+    if (leftEncoder.getDistance() < 200) {
       drive.arcadeDrive(0.5, 0);
     }else {
       drive.arcadeDrive(0, 0);
+      System.out.println("off");
     }
-  }*/
+  }
 }
