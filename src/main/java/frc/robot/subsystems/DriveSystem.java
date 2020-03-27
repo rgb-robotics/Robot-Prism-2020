@@ -66,7 +66,7 @@ public class DriveSystem extends Subsystem {
 
   public static void autonomous() {
     System.out.println(leftEncoder.getDistance());
-    if (leftEncoder.getDistance() < 200) {
+    if (leftEncoder.getDistance() < 200) { 
       drive.arcadeDrive(0.5, 0);
     }else {
       drive.arcadeDrive(0, 0);
