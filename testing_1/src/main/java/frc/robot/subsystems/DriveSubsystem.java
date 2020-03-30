@@ -26,10 +26,8 @@ public class DriveSubsystem extends SubsystemBase {
   private static SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotorA, rightMotorB, rightMotorC);
   private static DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
-  public void drive(double speed, double rotation, double scale) {
-    double speedFinal = speed * scale;
-    double rotationFinal = rotation * scale;
-    drive.arcadeDrive(speedFinal, rotationFinal);
+  public void drive(double speed, double rotation) {
+    drive.arcadeDrive(speed, rotation);
   }
 
   @Override

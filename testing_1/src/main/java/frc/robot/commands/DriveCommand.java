@@ -15,9 +15,13 @@ public class DriveCommand extends CommandBase {
 
   private final DriveSubsystem DriveSubsystem;
   
-  public DriveCommand(DriveSubsystem m_driveSubsystem) {
-    DriveSubsystem = m_driveSubsystem;
-    //addRequirements(m_driveSubsystem);
+  private double finalSpeed;
+  private double finalRotation;
+  private double finalScale;
+
+  public DriveCommand(DriveSubsystem driveSubsystem) {
+    DriveSubsystem = driveSubsystem;
+    addRequirements(driveSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -25,13 +29,16 @@ public class DriveCommand extends CommandBase {
   public void initialize() {
   }
 
+  public void driveCalculation(double speed, double rotation, double scale) {
+    finalSpeed = -speed;
+    finalRotation = rotation;
+    finalScale = -0.13 * scale + 0.67;
+  }
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = -RobotContainer.stick.getY();
-    double rotation = RobotContainer.stick.getX();
-    double scale = -0.13*(RobotContainer.stick.getThrottle())+0.67;
-    DriveSubsystem.drive(speed, rotation, scale);
+    DriveSubsystem.drive(finalSpeed * finalScale, finalRotation * finalScale);
   }
 
   // Called once the command ends or is interrupted.
