@@ -24,10 +24,10 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  private final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
+  private final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+  private final ExampleCommand autoCommand = new ExampleCommand(exampleSubsystem);
+  private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  private final DriveCommand driveCommand = new DriveCommand(driveSubsystem);
   
   public static Joystick stick = new Joystick(RobotMap.stickPort);
   public XboxController controller = new XboxController(RobotMap.controllerPort);
@@ -48,6 +48,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
   }
 
 
@@ -58,6 +59,10 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return autoCommand;
+  }
+
+  public Command getTeleopCommand(){
+    return driveCommand;
   }
 }
