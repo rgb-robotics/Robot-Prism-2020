@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  private static Spark leftMotorA = new Spark(RobotMap.rightMotorA);
-  private static Spark leftMotorB = new Spark(RobotMap.rightMotorB);
-  private static Spark leftMotorC = new Spark(RobotMap.rightMotorC);
+  private static Spark leftMotorA = new Spark(RobotMap.leftMotorA);
+  private static Spark leftMotorB = new Spark(RobotMap.leftMotorB);
+  private static Spark leftMotorC = new Spark(RobotMap.leftMotorC);
   private static Spark rightMotorA = new Spark(RobotMap.rightMotorA);
   private static Spark rightMotorB = new Spark(RobotMap.rightMotorB);
   private static Spark rightMotorC = new Spark(RobotMap.rightMotorC);
