@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.RobotContainer;
 
 public class DriveCommand extends CommandBase {
 
@@ -37,7 +36,7 @@ public class DriveCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  public void execute(){
     DriveSubsystem.drive(finalSpeed * finalScale, finalRotation * finalScale);
   }
 
