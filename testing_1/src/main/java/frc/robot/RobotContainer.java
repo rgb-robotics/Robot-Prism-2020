@@ -32,7 +32,6 @@ public class RobotContainer {
   public static Joystick stick = new Joystick(RobotMap.stickPort);
   public XboxController controller = new XboxController(RobotMap.controllerPort);
 
-
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -48,7 +47,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
+    driveCommand.driveCalculation(stick.getY(), stick.getX(), stick.getThrottle());
   }
 
 
