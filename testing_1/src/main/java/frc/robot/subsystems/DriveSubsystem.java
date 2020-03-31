@@ -17,20 +17,20 @@ import edu.wpi.first.wpilibj.Encoder;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  private static Spark leftMotorA = new Spark(Constants.leftMotorA);
-  private static Spark leftMotorB = new Spark(Constants.leftMotorB);
-  private static Spark leftMotorC = new Spark(Constants.leftMotorC);
-  private static Spark rightMotorA = new Spark(Constants.rightMotorA);
-  private static Spark rightMotorB = new Spark(Constants.rightMotorB);
-  private static Spark rightMotorC = new Spark(Constants.rightMotorC);
+  private static Spark leftMotorA = new Spark(Constants.DriveMotorPorts.kLeftMotorA);
+  private static Spark leftMotorB = new Spark(Constants.DriveMotorPorts.kLeftMotorB);
+  private static Spark leftMotorC = new Spark(Constants.DriveMotorPorts.kLeftMotorC);
+  private static Spark rightMotorA = new Spark(Constants.DriveMotorPorts.kRightMotorA);
+  private static Spark rightMotorB = new Spark(Constants.DriveMotorPorts.kRightMotorB);
+  private static Spark rightMotorC = new Spark(Constants.DriveMotorPorts.kRightMotorC);
   private static SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotorA, leftMotorB, leftMotorC);
   private static SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotorA, rightMotorB, rightMotorC);
   private static DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
-  private static Encoder leftEncoder = new Encoder(Constants.driveLeftEncoderA, Constants.driveLeftEncoderB, false, EncodingType.k4X);
-  private static Encoder rightEncoder = new Encoder(Constants.driveRightEncoderA, Constants.driveRightEncoderB, true, EncodingType.k4X);
+  private static Encoder leftEncoder = new Encoder(Constants.EncoderPorts.kDriveLeftEncoderA, Constants.EncoderPorts.kDriveLeftEncoderB, false, EncodingType.k4X);
+  private static Encoder rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
 
   public void drive(double speed, double rotation) {
-    if (leftEncoder.getDistance() < 10000) {
+    if (leftEncoder.getDistance() < 100) {
       drive.arcadeDrive(speed, rotation);
     } else {
       drive.arcadeDrive(0, 0);

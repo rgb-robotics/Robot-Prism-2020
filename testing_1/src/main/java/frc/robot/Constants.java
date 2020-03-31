@@ -16,26 +16,36 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    
-  //drive motor PWM ports
-  public static final int leftMotorA = 1;
-  public static final int leftMotorB = 2;
-  public static final int leftMotorC = 3;
-  public static final int rightMotorA = 4;
-  public static final int rightMotorB = 5;
-  public static final int rightMotorC = 6;  
+   
+  public static final class DriveMotorPorts {
+    //drive motor PWM ports
+    public static final int kLeftMotorA = 1;
+    public static final int kLeftMotorB = 2;
+    public static final int kLeftMotorC = 3;
+    public static final int kRightMotorA = 4;
+    public static final int kRightMotorB = 5;
+    public static final int kRightMotorC = 6;  
+  }
 
-  //encoder DIO ports
-  public static final int driveLeftEncoderA = 1;
-  public static final int driveLeftEncoderB = 2;
-  public static final int driveRightEncoderA = 3;
-  public static final int driveRightEncoderB = 4;
+  public static final class EncoderPorts {
+    //encoder DIO ports
+    public static final int kDriveLeftEncoderA = 1;
+    public static final int kDriveLeftEncoderB = 2;
+    public static final int kDriveRightEncoderA = 3;
+    public static final int kDriveRightEncoderB = 4;
+  }
 
-  //controller ports
-  public static final int stickPort = 0;
-  public static final int controllerPort = 1;
+  public static final class ControllerPorts {
+    //controller ports
+    public static final int kStickPort = 0;
+    public static final int kControllerPort = 1;
+  }
 
-  //encoder distance per pulse
-  public static final int driveLeftEncoderDistancePerPulse = 1 / 256;
-  public static final int driveRightEncoderDistancePerPulse = 1 / 256;
+  public static final class EncoderConstants {
+    //encoder distance per pulse
+    //CPR=counts per revolution, DPR=distance per revolutionDPP=distance per pulse
+    public static final double kDriveEncoderCPR = 256;
+    public static final double kDriveEncoderDPR = kDriveEncoderCPR * Math.PI;
+    public static final double kDriveEncoderDPP = kDriveEncoderDPR / kDriveEncoderCPR;
+  }
 }
