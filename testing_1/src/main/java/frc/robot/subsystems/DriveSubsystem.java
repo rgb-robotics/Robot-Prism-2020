@@ -27,10 +27,10 @@ public class DriveSubsystem extends SubsystemBase {
   private static SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotorA, rightMotorB, rightMotorC);
   private static DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
   private static Encoder leftEncoder = new Encoder(Constants.driveLeftEncoderA, Constants.driveLeftEncoderB, false, EncodingType.k4X);
-  private static Encoder rightEncoder = new Encoder(Constants.driveLeftEncoderA, Constants.driveLeftEncoderB, true, EncodingType.k4X);
+  private static Encoder rightEncoder = new Encoder(Constants.driveRightEncoderA, Constants.driveRightEncoderB, true, EncodingType.k4X);
 
   public void drive(double speed, double rotation) {
-    if (leftEncoder.getDistance() < 100) {
+    if (leftEncoder.getDistance() < 10000) {
       drive.arcadeDrive(speed, rotation);
     } else {
       drive.arcadeDrive(0, 0);
