@@ -17,33 +17,25 @@ import edu.wpi.first.wpilibj.Encoder;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  private static Spark leftMotorA = new Spark(Constants.DriveMotorPorts.kLeftMotorA);
-  private static Spark leftMotorB = new Spark(Constants.DriveMotorPorts.kLeftMotorB);
-  private static Spark leftMotorC = new Spark(Constants.DriveMotorPorts.kLeftMotorC);
-  private static Spark rightMotorA = new Spark(Constants.DriveMotorPorts.kRightMotorA);
-  private static Spark rightMotorB = new Spark(Constants.DriveMotorPorts.kRightMotorB);
-  private static Spark rightMotorC = new Spark(Constants.DriveMotorPorts.kRightMotorC);
-  private static SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotorA, leftMotorB, leftMotorC);
-  private static SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotorA, rightMotorB, rightMotorC);
-  private static DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
-  private static Encoder leftEncoder = new Encoder(Constants.EncoderPorts.kDriveLeftEncoderA, Constants.EncoderPorts.kDriveLeftEncoderB, false, EncodingType.k4X);
-  private static Encoder rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
+  private static final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(new Spark(Constants.DriveMotorPorts.kLeftMotor1), new Spark(Constants.DriveMotorPorts.kLeftMotor2), new Spark(Constants.DriveMotorPorts.kLeftMotor3));
+  private static final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(new Spark(Constants.DriveMotorPorts.kRightMotor1), new Spark(Constants.DriveMotorPorts.kRightMotor2), new Spark(Constants.DriveMotorPorts.kRightMotor3));
+  private static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+  private static final Encoder m_leftEncoder = new Encoder(Constants.EncoderPorts.kDriveLeftEncoderA, Constants.EncoderPorts.kDriveLeftEncoderB, false, EncodingType.k4X);
+  private static final Encoder m_rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
 
   public void drive(double speed, double rotation) {
-    if (leftEncoder.getDistance() < 5000) {
-      drive.arcadeDrive(speed, rotation);
+    if (m_leftEncoder.getDistance() < 5000) {
+      m_drive.arcadeDrive(speed, rotation);
     } else {
-      drive.arcadeDrive(0, 0);
+      m_drive.arcadeDrive(0, 0);
     }
   }
 
-  
-
   public void resetEncoders() {
-    leftEncoder.setDistancePerPulse(Constants.EncoderConstants.kDriveEncoderDPP);
-    rightEncoder.setDistancePerPulse(Constants.EncoderConstants.kDriveEncoderDPP);
-    leftEncoder.reset();
-    rightEncoder.reset();
+    m_leftEncoder.setDistancePerPulse(Constants.EncoderConstants.kDriveEncoderDPP);
+    m_rightEncoder.setDistancePerPulse(Constants.EncoderConstants.kDriveEncoderDPP);
+    m_leftEncoder.reset();
+    m_rightEncoder.reset();
   }
 
   @Override

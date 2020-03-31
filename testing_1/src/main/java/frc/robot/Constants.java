@@ -19,12 +19,17 @@ public final class Constants {
    
   public static final class DriveMotorPorts {
     //drive motor PWM ports
-    public static final int kLeftMotorA = 1;
-    public static final int kLeftMotorB = 2;
-    public static final int kLeftMotorC = 3;
-    public static final int kRightMotorA = 4;
-    public static final int kRightMotorB = 5;
-    public static final int kRightMotorC = 6;  
+    public static final int kLeftMotor1 = 1;
+    public static final int kLeftMotor2 = 2;
+    public static final int kLeftMotor3 = 3;
+    public static final int kRightMotor1 = 4;
+    public static final int kRightMotor2 = 5;
+    public static final int kRightMotor3 = 6;  
+  }
+
+  public static final class IntakeMotorPorts {
+    //intake motor PWM ports
+    public static final int kIntakeMotor = 0;
   }
 
   public static final class EncoderPorts {
@@ -35,6 +40,12 @@ public final class Constants {
     public static final int kDriveRightEncoderB = 4;
   }
 
+  public static final class SolenoidPorts {
+    //soilenoid PCM channels
+    public static final int kIntakeSolenoidForwardChannel = 0;
+    public static final int kIntakeSolenoidReverseChannel = 1;
+  }
+
   public static final class ControllerPorts {
     //controller ports
     public static final int kStickPort = 0;
@@ -43,9 +54,10 @@ public final class Constants {
 
   public static final class EncoderConstants {
     //encoder distance per pulse
-    //CPR=counts per revolution, DPR=distance per revolutionDPP=distance per pulse
+    //DPR=distance per revolution, CPR=counts per revolution, DPP=distance per pulse, GR=gear ratio
+    public static final double kDriveEncoderDPR = 6 * Math.PI;
     public static final double kDriveEncoderCPR = 256;
-    public static final double kDriveEncoderDPR = kDriveEncoderCPR * Math.PI;
-    public static final double kDriveEncoderDPP = kDriveEncoderDPR / kDriveEncoderCPR;
+    public static final double kDriveGearBoxGR = ?;
+    public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) * kDriveGearBoxGR;
   }
 }

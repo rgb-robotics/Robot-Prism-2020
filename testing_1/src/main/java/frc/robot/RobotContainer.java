@@ -14,6 +14,8 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.commands.DriveCommand;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.commands.IntakeCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -24,11 +26,13 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand autoCommand = new ExampleCommand(exampleSubsystem);
-  private final DriveSubsystem driveSubsystem = new DriveSubsystem();
-  private final DriveCommand driveCommand = new DriveCommand(driveSubsystem);
-  
+  private static final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private static final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  private static final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
+  private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  private static final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
+
   public static Joystick stick = new Joystick(Constants.ControllerPorts.kStickPort);
   public XboxController controller = new XboxController(Constants.ControllerPorts.kControllerPort);
 
@@ -37,7 +41,8 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Set the default commands here
-    driveSubsystem.setDefaultCommand(driveCommand);
+    m_driveSubsystem.setDefaultCommand(m_driveCommand);
+    m_intakeSubsystem.setDefaultCommand(m_intakeCommand);
 
     configureButtonBindings();
   }
@@ -61,10 +66,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return autoCommand;
-  }
-
-  public Command getTeleopCommand(){
-    return driveCommand;
+    return m_autoCommand;
   }
 }
