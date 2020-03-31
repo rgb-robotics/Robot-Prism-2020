@@ -16,4 +16,26 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    
+  //drive motor PWM ports
+  public static final int leftMotorA = 1;
+  public static final int leftMotorB = 2;
+  public static final int leftMotorC = 3;
+  public static final int rightMotorA = 4;
+  public static final int rightMotorB = 5;
+  public static final int rightMotorC = 6;  
+
+  //encoder DIO ports
+  public static final int driveLeftEncoderA = 1;
+  public static final int driveLeftEncoderB = 2;
+  public static final int driveRightEncoderA = 3;
+  public static final int driveRightEncoderB = 4;
+
+  //controller ports
+  public static final int stickPort = 0;
+  public static final int controllerPort = 1;
+
+  //encoder distance per pulse
+  public static final int driveLeftEncoderDistancePerPulse = 1 / 256;
+  public static final int driveRightEncoderDistancePerPulse = 1 / 256;
 }

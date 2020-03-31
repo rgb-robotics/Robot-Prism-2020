@@ -29,8 +29,8 @@ public class RobotContainer {
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final DriveCommand driveCommand = new DriveCommand(driveSubsystem);
   
-  public static Joystick stick = new Joystick(RobotMap.stickPort);
-  public XboxController controller = new XboxController(RobotMap.controllerPort);
+  public static Joystick stick = new Joystick(Constants.stickPort);
+  public XboxController controller = new XboxController(Constants.controllerPort);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
