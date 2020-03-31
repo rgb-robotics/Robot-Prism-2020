@@ -30,7 +30,7 @@ public class DriveSubsystem extends SubsystemBase {
   private static Encoder rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
 
   public void drive(double speed, double rotation) {
-    if (leftEncoder.getDistance() < 100) {
+    if (leftEncoder.getDistance() < 5000) {
       drive.arcadeDrive(speed, rotation);
     } else {
       drive.arcadeDrive(0, 0);
@@ -40,6 +40,8 @@ public class DriveSubsystem extends SubsystemBase {
   
 
   public void resetEncoders() {
+    leftEncoder.setDistancePerPulse(Constants.EncoderConstants.kDriveEncoderDPP);
+    rightEncoder.setDistancePerPulse(Constants.EncoderConstants.kDriveEncoderDPP);
     leftEncoder.reset();
     rightEncoder.reset();
   }
