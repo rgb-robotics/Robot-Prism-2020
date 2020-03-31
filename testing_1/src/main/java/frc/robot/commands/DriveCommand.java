@@ -38,7 +38,7 @@ public class DriveCommand extends CommandBase {
     speed = RobotContainer.stick.getY() * scale;
     rotation = RobotContainer.stick.getX() * scale;
     scale = -0.13 * RobotContainer.stick.getThrottle() + 0.67;
-    DriveSubsystem.drive(finalSpeed * finalScale, finalRotation * finalScale);
+    DriveSubsystem.drive(speed , rotation );
   }
 
   // Called once the command ends or is interrupted.
