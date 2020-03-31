@@ -8,12 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class DriveCommand extends CommandBase {
 
   private final DriveSubsystem DriveSubsystem;
   
+  private double speed;
+  private double rotation;
+  private double scale;
   private double finalSpeed;
   private double finalRotation;
   private double finalScale;
@@ -28,15 +32,12 @@ public class DriveCommand extends CommandBase {
   public void initialize() {
   }
 
-  public void driveCalculation(double speed, double rotation, double scale) {
-    finalSpeed = -speed;
-    finalRotation = rotation;
-    finalScale = -0.13 * scale + 0.67;
-  }
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
+    speed = RobotContainer.stick.getY() * scale;
+    rotation = RobotContainer.stick.getX() * scale;
+    scale = -0.13 * RobotContainer.stick.getThrottle() + 0.67;
     DriveSubsystem.drive(finalSpeed * finalScale, finalRotation * finalScale);
   }
 

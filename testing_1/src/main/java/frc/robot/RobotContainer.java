@@ -50,7 +50,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Configure the button bindings here
-    driveCommand.driveCalculation(stick.getY(), stick.getX(), stick.getThrottle());
+    
   }
 
 
