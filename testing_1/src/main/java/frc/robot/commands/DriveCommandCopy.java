@@ -11,19 +11,22 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class DriveCommand extends CommandBase {
+public class DriveCommandCopy extends CommandBase {
 
-  //Create an instance of the subsystem and require it here.
-  private final DriveSubsystem m_driveSubsystem;
-  public DriveCommand(DriveSubsystem driveSubsystem) {
+  //Create local variables for the class here. Define the local variables to be the value of the instance variables.
+  private static DriveSubsystem m_driveSubsystem;
+  private static double m_scale;
+  private static double m_speed;
+  private static double m_rotation;
+  public DriveCommandCopy(DriveSubsystem driveSubsystem, double scale, double speed, double rotation) {
     m_driveSubsystem = driveSubsystem;
+    m_scale = -0.13 * scale + 0.67;
+    m_speed = speed * m_scale;
+    m_rotation = rotation * m_scale;
+
+    //Require the instance of the subsystem here.
     addRequirements(driveSubsystem);
   }
-  
-  //Define variables for the class here.
-  private static double scale;
-  private static double speed;
-  private static double rotation;
 
   // Called when the command is initially scheduled.
   @Override
@@ -34,11 +37,7 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    scale = -0.13 * RobotContainer.m_stick.getThrottle() + 0.67;
-    speed = -RobotContainer.m_stick.getY() * scale;
-    rotation = RobotContainer.m_stick.getX() * scale;
-
-    m_driveSubsystem.drive(speed, rotation);
+    m_driveSubsystem.drive(m_speed, m_rotation);
   }
 
   // Called once the command ends or is interrupted.

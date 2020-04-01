@@ -14,6 +14,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.DriveCommandCopy;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.commands.IntakeCommand;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,19 +30,19 @@ public class RobotContainer {
   private static final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private static final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  private static final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
+  //private static final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
   private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private static final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
 
-  public static Joystick stick = new Joystick(Constants.ControllerPorts.kStickPort);
-  public XboxController controller = new XboxController(Constants.ControllerPorts.kControllerPort);
+  public static final Joystick m_stick = new Joystick(Constants.ControllerPorts.kStickPort);
+  public static final XboxController m_controller = new XboxController(Constants.ControllerPorts.kControllerPort);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Set the default commands here
-    m_driveSubsystem.setDefaultCommand(m_driveCommand);
+    //Set the default commands here. Configure the button bindings here.
+    m_driveSubsystem.setDefaultCommand(new DriveCommandCopy(m_driveSubsystem, m_stick.getThrottle(), -m_stick.getY(), m_stick.getX()));
     m_intakeSubsystem.setDefaultCommand(m_intakeCommand);
 
     configureButtonBindings();
@@ -54,8 +55,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Configure the button bindings here
-    
+    //Configure the button bindings here.
   }
 
 

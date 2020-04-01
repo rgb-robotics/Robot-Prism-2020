@@ -57,7 +57,7 @@ public final class Constants {
     //DPR=distance per revolution, CPR=counts per revolution, DPP=distance per pulse, GR=gear ratio
     public static final double kDriveEncoderDPR = 6 * Math.PI;
     public static final double kDriveEncoderCPR = 256;
-    public static final double kDriveGearBoxGR = ?;
-    public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) * kDriveGearBoxGR;
+    //public static final double kDriveGearBoxGR = ?;
+    public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) /** kDriveGearBoxGR*/;
   }
 }

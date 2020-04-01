@@ -16,14 +16,14 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;;
 public class IntakeSubsystem extends SubsystemBase {
 
   private static final Spark m_intakeMotor = new Spark(Constants.IntakeMotorPorts.kIntakeMotor);
-  private static final DoubleSolenoid m_intakeSolenoid = new DoubleSolenoid(Constants.SolenoidPorts.kIntakeSolenoidForwardChannel, Constants.SolenoidPorts.kIntakeSolenoidReverseChannel)
+  private static final DoubleSolenoid m_intakeSolenoid = new DoubleSolenoid(Constants.SolenoidPorts.kIntakeSolenoidForwardChannel, Constants.SolenoidPorts.kIntakeSolenoidReverseChannel);
 
-  public void intakeStat(boolean intakeStat) {
+  public void intake(boolean intakeStat) {
 
-    m_intakeMotor.setSpeed(?);
+    m_intakeMotor.setSpeed(0.8);
   }
 
-  public void intakeElevation() {
+  public void intakeElevation(boolean intakeElevationStat) {
     
   }
 

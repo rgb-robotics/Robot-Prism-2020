@@ -13,12 +13,16 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeCommand extends CommandBase {
 
+  //Create an instance of the subsystem and require it here.
   private final IntakeSubsystem m_intakeSubsystem;
-
   public IntakeCommand(IntakeSubsystem intakeSubsystem) {
     m_intakeSubsystem = intakeSubsystem;
     addRequirements(intakeSubsystem);
   }
+
+  //Define variables for this class here.
+  private static boolean m_intakeStat; //true=start, false=stop
+  private static boolean m_intakeElevationStat; //true=down, false=up
 
   // Called when the command is initially scheduled.
   @Override
@@ -28,7 +32,15 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    
+    /*if (RobotContainer.m_controller.getAButton()) {
+      m_intakeStat = !m_intakeStat;
+    }
+    m_intakeSubsystem.intake(m_intakeStat);
+
+    if (RobotContainer.m_controller.) {
+      m_intakeElevationStat = ！m_intakeElevationStat;
+    }
+    m_intakeSubsystem.intakeElevation(m_intakeElevationStat);*/
   }
 
   // Called once the command ends or is interrupted.
