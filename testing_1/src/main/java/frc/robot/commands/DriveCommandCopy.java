@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
@@ -15,14 +16,18 @@ public class DriveCommandCopy extends CommandBase {
 
   //Create local variables for the class here. Define the local variables to be the value of the instance variables.
   private static DriveSubsystem m_driveSubsystem;
-  private static double m_scale;
-  private static double m_speed;
-  private static double m_rotation;
-  public DriveCommandCopy(DriveSubsystem driveSubsystem, double scale, double speed, double rotation) {
+  private static DoubleSupplier m_scale;
+  private static DoubleSupplier m_speed;
+  private static DoubleSupplier m_rotation;
+  public DriveCommandCopy(DriveSubsystem driveSubsystem, DoubleSupplier scale, DoubleSupplier speed, DoubleSupplier rotation) {
     m_driveSubsystem = driveSubsystem;
-    m_scale = -0.13 * scale + 0.67;
+    m_scale = scale;
+    m_speed = speed;
+    m_rotation = rotation;
+    
+    /*m_scale = -0.13 * scale + 0.67;
     m_speed = speed * m_scale;
-    m_rotation = rotation * m_scale;
+    m_rotation = rotation * m_scale;*/
 
     //Require the instance of the subsystem here.
     addRequirements(driveSubsystem);

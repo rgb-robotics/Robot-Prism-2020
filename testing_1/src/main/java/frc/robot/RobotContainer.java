@@ -42,7 +42,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     //Set the default commands here. Configure the button bindings here.
-    m_driveSubsystem.setDefaultCommand(new DriveCommandCopy(m_driveSubsystem, m_stick.getThrottle(), -m_stick.getY(), m_stick.getX()));
+    m_driveSubsystem.setDefaultCommand(new DriveCommandCopy(m_driveSubsystem, () -> m_stick.getThrottle(), () -> -m_stick.getY(), () -> m_stick.getX()));
     m_intakeSubsystem.setDefaultCommand(m_intakeCommand);
 
     configureButtonBindings();
