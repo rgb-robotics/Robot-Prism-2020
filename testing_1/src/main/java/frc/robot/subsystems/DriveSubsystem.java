@@ -23,9 +23,9 @@ public class DriveSubsystem extends SubsystemBase {
   private static final Encoder m_leftEncoder = new Encoder(Constants.EncoderPorts.kDriveLeftEncoderA, Constants.EncoderPorts.kDriveLeftEncoderB, false, EncodingType.k4X);
   private static final Encoder m_rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
 
-  public void drive(double speed, double rotation) {
+  public void drive(double speed, double rotation, double scale) {
     if (m_leftEncoder.getDistance() < 5000) {
-      m_drive.arcadeDrive(speed, rotation);
+      m_drive.arcadeDrive(speed * scale, rotation * scale);
     } else {
       m_drive.arcadeDrive(0, 0);
     }

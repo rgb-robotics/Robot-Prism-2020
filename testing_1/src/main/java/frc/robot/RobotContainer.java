@@ -14,7 +14,6 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.DriveCommandCopy;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.commands.IntakeCommand;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -26,14 +25,13 @@ import edu.wpi.first.wpilibj2.command.Command;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
+  //The robot's subsystems are defined here.
   private static final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private static final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  //private static final DriveCommand m_driveCommand = new DriveCommand(m_driveSubsystem);
   private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  private static final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
 
+  //The robot's joystick(s) and controller(s) are defined here.
   public static final Joystick m_stick = new Joystick(Constants.ControllerPorts.kStickPort);
   public static final XboxController m_controller = new XboxController(Constants.ControllerPorts.kControllerPort);
 
@@ -42,8 +40,8 @@ public class RobotContainer {
    */
   public RobotContainer() {
     //Set the default commands here. Configure the button bindings here.
-    m_driveSubsystem.setDefaultCommand(new DriveCommandCopy(m_driveSubsystem, () -> m_stick.getThrottle(), () -> -m_stick.getY(), () -> m_stick.getX()));
-    m_intakeSubsystem.setDefaultCommand(m_intakeCommand);
+    m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, () -> m_stick.getThrottle(), () -> -m_stick.getY(), () -> m_stick.getX()));
+    m_intakeSubsystem.setDefaultCommand(new IntakeCommand(), () -> m_controller.getAButton(), () -> m_controller.getYButton());
 
     configureButtonBindings();
   }

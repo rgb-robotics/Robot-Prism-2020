@@ -18,14 +18,44 @@ public class IntakeSubsystem extends SubsystemBase {
   private static final Spark m_intakeMotor = new Spark(Constants.IntakeMotorPorts.kIntakeMotor);
   private static final DoubleSolenoid m_intakeSolenoid = new DoubleSolenoid(Constants.SolenoidPorts.kIntakeSolenoidForwardChannel, Constants.SolenoidPorts.kIntakeSolenoidReverseChannel);
 
-  public void intake(boolean intakeStat) {
+  public void intakeRun() {
+    m_intakeMotor.set(0.8);
+  }
 
-    m_intakeMotor.setSpeed(0.8);
+  public void intakeStop() {
+    m_intakeMotor.set(0);
+  }
+
+  public void intakeUp() {
+    m_intakeSolenoid.set(Value.kReverse);
+  }
+
+  public void intakeDown() {
+    m_intakeSolenoid.set(Value.kForward);
+  }
+
+
+  /*
+  public void intake(boolean intakeStat) {
+    if (intakeStat = true) {
+      m_intakeMotor.set(0.8);
+    } 
+    else {
+      m_intakeMotor.set(0);
+    }
   }
 
   public void intakeElevation(boolean intakeElevationStat) {
-    
+    if (intakeElevationStat = true) {
+      m_intakeSolenoid.set(Value.kReverse);
+    }
+    else {
+      m_intakeSolenoid.set(Value.kForward);
+    }
   }
+
+  
+  */
 
   @Override
   public void periodic() {
