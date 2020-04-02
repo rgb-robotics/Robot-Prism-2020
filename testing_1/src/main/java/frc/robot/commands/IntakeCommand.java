@@ -18,7 +18,7 @@ public class IntakeCommand extends CommandBase {
   private static IntakeSubsystem m_intakeSubsystem;
   private static BooleanSupplier m_intake;
   private static BooleanSupplier m_intakeElevation;
-  private static boolean m_intakeStat; //true=start, false=stop
+  private static boolean m_intakeStat; //true=run, false=stop
   private static boolean m_intakeElevationStat; //true=down, false=up
 
   //Define the local variables to be the value of the instance variables.
@@ -40,16 +40,15 @@ public class IntakeCommand extends CommandBase {
   public void execute(){
     if (m_intake.getAsBoolean() == true) {
       m_intakeStat = !m_intakeStat;
-
-      if (m_intakeStat = true) {
-        m_intakeSubsystem.intakeRun();
-      }
-      else if (m_intakeStat = false) {
-        m_intakeSubsystem.intakeStop();
-      }
-      System.out.println("hi");
     }
-    
+    if (m_intakeStat = true) {
+      m_intakeSubsystem.intakeRun();
+    }
+    else {
+      m_intakeSubsystem.intakeStop();
+    }
+    System.out.println(m_intakeStat);
+
     /*
     if (m_intakeStat = true) {
       
