@@ -44,6 +44,9 @@ public class IntakeCommand extends CommandBase {
       if (m_intakeStat = true) {
         m_intakeSubsystem.intakeRun();
       }
+      else if (m_intakeStat = false) {
+        m_intakeSubsystem.inTakeStop();
+      }
     }
     
     /*
