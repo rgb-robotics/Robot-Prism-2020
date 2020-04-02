@@ -42,7 +42,7 @@ public class DriveCommandCopy extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    m_driveSubsystem.drive(m_speed, m_rotation);
+    m_driveSubsystem.drive(m_speed.getAsDouble(), m_rotation.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
