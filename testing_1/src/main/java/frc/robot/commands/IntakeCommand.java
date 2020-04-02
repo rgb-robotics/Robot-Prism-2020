@@ -15,11 +15,11 @@ import java.util.function.BooleanSupplier;
 public class IntakeCommand extends CommandBase {
   
   //Create local variables for the class here.
-  private final IntakeSubsystem m_intakeSubsystem;
-  private final BooleanSupplier m_intake;
-  private final BooleanSupplier m_intakeElevation;
-  private final boolean m_intakeStat; //true=start, false=stop
-  private final boolean m_intakeElevationStat; //true=down, false=up
+  private static IntakeSubsystem m_intakeSubsystem;
+  private static BooleanSupplier m_intake;
+  private static BooleanSupplier m_intakeElevation;
+  private static boolean m_intakeStat; //true=start, false=stop
+  private static boolean m_intakeElevationStat; //true=down, false=up
 
   //Define the local variables to be the value of the instance variables.
   public IntakeCommand(IntakeSubsystem intakeSubsystem, BooleanSupplier intake, BooleanSupplier intakeElevation) {
