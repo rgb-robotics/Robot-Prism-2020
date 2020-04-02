@@ -38,7 +38,7 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    if (() -> m_intake.getAsBoolean() = true) {
+    if (m_intake.getAsBoolean() == true) {
       m_intakeStat = !m_intakeStat;
 
       if (m_intakeStat = true) {
@@ -47,6 +47,7 @@ public class IntakeCommand extends CommandBase {
       else if (m_intakeStat = false) {
         m_intakeSubsystem.intakeStop();
       }
+      System.out.println("hi");
     }
     
     /*
