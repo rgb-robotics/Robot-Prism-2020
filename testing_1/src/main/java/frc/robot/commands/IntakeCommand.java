@@ -18,7 +18,7 @@ public class IntakeCommand extends CommandBase {
   private static IntakeSubsystem m_intakeSubsystem;
   private static BooleanSupplier m_intake;
   private static BooleanSupplier m_intakeElevation;
-  private static boolean m_intakeStat; //true=run, false=stop
+  private static boolean intakeStat; //true=run, false=stop
   private static boolean m_intakeElevationStat; //true=down, false=up
 
   //Define the local variables to be the value of the instance variables.
@@ -33,6 +33,7 @@ public class IntakeCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    intakeStat = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -40,15 +41,15 @@ public class IntakeCommand extends CommandBase {
   public void execute(){
     System.out.println(m_intake);
     if (m_intake.getAsBoolean() == true) {
-      m_intakeStat = !m_intakeStat;
+      intakeStat = !intakeStat;
     }
-    if (m_intakeStat = true) {
+    if (intakeStat = true) {
       m_intakeSubsystem.intakeRun();
     }
-    if (m_intakeStat = false) {
+    if (intakeStat = false) {
       m_intakeSubsystem.intakeStop();
     }
-    System.out.println(m_intakeStat);
+    System.out.println(intakeStat);
 
     /*
     if (m_intakeStat = true) {
