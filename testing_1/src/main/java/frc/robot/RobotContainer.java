@@ -15,8 +15,10 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeCommand_1;
+import frc.robot.commands.IntakeCommand_2;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -41,8 +43,7 @@ public class RobotContainer {
   public RobotContainer() {
     //Set the default commands here. Configure the button bindings here.
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, () -> m_stick.getThrottle(), () -> -m_stick.getY(), () -> m_stick.getX()));
-    m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem, () -> m_controller.getAButton(), () -> m_controller.getYButton()));
-
+    
     configureButtonBindings();
   }
 
@@ -53,7 +54,13 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //Create the button bindings here.
+    JoystickButton controllerA = new JoystickButton(m_controller, 1);
+    JoystickButton controllerRT = new JoystickButton(m_controller, 12);
+
     //Configure the button bindings here.
+    controllerA.toggleWhenActive(new IntakeCommand_1());
+    controllerRT.toggleWhenActive(new IntakeCommand_2());
   }
 
 
