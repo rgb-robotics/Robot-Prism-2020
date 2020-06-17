@@ -48,7 +48,7 @@ public class IntakeCommand extends CommandBase {
     if (intakeStat == false) {
       m_intakeSubsystem.intakeStop();
     }
-    System.out.println(m_intake.getAsBoolean());
+    System.out.println(intakeStat);
 
     /*
     if (m_intakeStat = true) {
