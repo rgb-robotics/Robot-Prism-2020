@@ -14,24 +14,22 @@ public class IntakeCommand_1 extends CommandBase {
   
   //Create local variables for the class here.
   private static IntakeSubsystem m_intakeSubsystem;
-  private static boolean m_intakeStat; //true=run, false=stop
+  private static boolean m_intakeStat = false; //true=run, false=stop
 
   public IntakeCommand_1() {
-    
+
     addRequirements(m_intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intakeStat = false;
+    m_intakeStat = !m_intakeStat;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    m_intakeStat = !m_intakeStat;
-
     if (m_intakeStat) {
       m_intakeSubsystem.intakeRun();
     } 

@@ -14,7 +14,7 @@ public class IntakeCommand_2 extends CommandBase {
   
   //Create local variables for the class here.
   private static IntakeSubsystem m_intakeSubsystem;
-  private static boolean m_intakeElevationStat; //true=down, false=up
+  private static boolean m_intakeElevationStat = false; //true=down, false=up
 
   public IntakeCommand_2() {
     
@@ -24,14 +24,12 @@ public class IntakeCommand_2 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intakeElevationStat = false;
+    m_intakeElevationStat = !m_intakeElevationStat;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    m_intakeElevationStat = !m_intakeElevationStat;
-
     if (m_intakeElevationStat) {
       m_intakeSubsystem.intakeDown();
     } 
