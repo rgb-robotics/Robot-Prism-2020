@@ -7,38 +7,37 @@
 
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class DriveCommand extends CommandBase {
-
+public class IntakeCommand_2 extends CommandBase {
+  
   //Create local variables for the class here.
-  private static DriveSubsystem m_driveSubsystem;
-  private static DoubleSupplier m_scale;
-  private static DoubleSupplier m_speed;
-  private static DoubleSupplier m_rotation;
+  private static IntakeSubsystem m_intakeSubsystem;
+  private static boolean m_intakeElevationStat; //true=down, false=up
 
-  //Define the local variables to be the value of the instance variables.
-  public DriveCommand(DriveSubsystem driveSubsystem, DoubleSupplier scale, DoubleSupplier speed, DoubleSupplier rotation) {
-    m_driveSubsystem = driveSubsystem;
-    m_scale = scale;
-    m_speed = speed;
-    m_rotation = rotation;
-
-    addRequirements(driveSubsystem);
+  public IntakeCommand_2() {
+    
+    addRequirements(m_intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_driveSubsystem.resetEncoders();
+    m_intakeElevationStat = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    m_driveSubsystem.drive(-m_speed.getAsDouble(), m_rotation.getAsDouble(), m_scale.getAsDouble());
+    m_intakeElevationStat = !m_intakeElevationStat;
+
+    if (m_intakeElevationStat) {
+      m_intakeSubsystem.intakeDown();
+    } 
+    else {
+      m_intakeSubsystem.intakeUp();
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -21,7 +21,6 @@ public class IntakeSubsystem extends SubsystemBase {
   public void intakeRun() {
     m_intakeMotor.set(0.8);
   }
-
   public void intakeStop() {
     m_intakeMotor.set(0);
   }
@@ -29,7 +28,6 @@ public class IntakeSubsystem extends SubsystemBase {
   public void intakeUp() {
     m_intakeSolenoid.set(Value.kReverse);
   }
-
   public void intakeDown() {
     m_intakeSolenoid.set(Value.kForward);
   }
