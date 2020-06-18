@@ -24,18 +24,19 @@ public class IntakeCommand_1 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intakeStat = !m_intakeStat;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
+    m_intakeStat = !m_intakeStat;
     if (m_intakeStat) {
       m_intakeSubsystem.intakeRun();
     } 
     else {
       m_intakeSubsystem.intakeStop();
     }
+    System.out.println(m_intakeStat);
   }
 
   // Called once the command ends or is interrupted.
