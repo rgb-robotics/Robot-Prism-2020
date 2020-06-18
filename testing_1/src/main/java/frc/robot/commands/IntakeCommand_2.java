@@ -24,12 +24,13 @@ public class IntakeCommand_2 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intakeElevationStat = !m_intakeElevationStat;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
+    m_intakeElevationStat = !m_intakeElevationStat;
+
     if (m_intakeElevationStat) {
       m_intakeSubsystem.intakeDown();
     } 

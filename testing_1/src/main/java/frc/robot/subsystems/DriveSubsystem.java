@@ -17,11 +17,19 @@ import edu.wpi.first.wpilibj.Encoder;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  private static final SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(new Spark(Constants.DriveMotorPorts.kLeftMotor1), new Spark(Constants.DriveMotorPorts.kLeftMotor2), new Spark(Constants.DriveMotorPorts.kLeftMotor3));
-  private static final SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(new Spark(Constants.DriveMotorPorts.kRightMotor1), new Spark(Constants.DriveMotorPorts.kRightMotor2), new Spark(Constants.DriveMotorPorts.kRightMotor3));
-  private static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
-  private static final Encoder m_leftEncoder = new Encoder(Constants.EncoderPorts.kDriveLeftEncoderA, Constants.EncoderPorts.kDriveLeftEncoderB, false, EncodingType.k4X);
-  private static final Encoder m_rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
+  private final SpeedControllerGroup m_leftMotors;
+  private final SpeedControllerGroup m_rightMotors;
+  private final DifferentialDrive m_drive;
+  private final Encoder m_leftEncoder;
+  private final Encoder m_rightEncoder;
+
+  public DriveSubsystem() {
+    m_leftMotors = new SpeedControllerGroup(new Spark(Constants.DriveMotorPorts.kLeftMotor1), new Spark(Constants.DriveMotorPorts.kLeftMotor2), new Spark(Constants.DriveMotorPorts.kLeftMotor3));
+    m_rightMotors = new SpeedControllerGroup(new Spark(Constants.DriveMotorPorts.kRightMotor1), new Spark(Constants.DriveMotorPorts.kRightMotor2), new Spark(Constants.DriveMotorPorts.kRightMotor3));
+    m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+    m_leftEncoder = new Encoder(Constants.EncoderPorts.kDriveLeftEncoderA, Constants.EncoderPorts.kDriveLeftEncoderB, false, EncodingType.k4X);
+    m_rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
+  }
 
   public void drive(double speed, double rotation, double scale) {
     if (m_leftEncoder.getDistance() < 5000) {

@@ -15,21 +15,56 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-  private static final Spark m_intakeMotor = new Spark(Constants.IntakeMotorPorts.kIntakeMotor);
-  private static final DoubleSolenoid m_intakeSolenoid = new DoubleSolenoid(Constants.SolenoidPorts.kIntakeSolenoidForwardChannel, Constants.SolenoidPorts.kIntakeSolenoidReverseChannel);
+  private final Spark m_intakeMotor;
+  private final DoubleSolenoid m_intakeSolenoid;
+  
+  private static boolean m_intakeStat;//true=run, false=stop
+  private static boolean m_intakeElevationStat; //true=down, false=up
+
+  public IntakeSubsystem() {
+    m_intakeMotor = new Spark(Constants.IntakeMotorPorts.kIntakeMotor);
+    m_intakeSolenoid = new DoubleSolenoid(Constants.SolenoidPorts.kIntakeSolenoidForwardChannel, Constants.SolenoidPorts.kIntakeSolenoidReverseChannel);
+
+    m_intakeStat = false;
+    m_intakeElevationStat = false;
+  }
 
   public void intakeRun() {
     m_intakeMotor.set(0.8);
+    m_intakeStat = true;
   }
   public void intakeStop() {
     m_intakeMotor.set(0);
+    m_intakeStat = false;
+  }
+  public void intakeRunStop() {
+    m_intakeStat = !m_intakeStat;
+    
+    if (m_intakeStat) {
+      intakeRun();
+    } 
+    else {
+      intakeStop();
+    }
   }
 
-  public void intakeUp() {
-    m_intakeSolenoid.set(Value.kReverse);
-  }
   public void intakeDown() {
     m_intakeSolenoid.set(Value.kForward);
+    m_intakeElevationStat = true;
+  }
+  public void intakeUp() {
+    m_intakeSolenoid.set(Value.kReverse);
+    m_intakeElevationStat = false;
+  }
+  public void intakeDownUp() {
+    m_intakeElevationStat = !m_intakeElevationStat;
+
+    if (m_intakeElevationStat) {
+      intakeDown();
+    } 
+    else {
+      intakeUp();
+    }
   }
 
   @Override

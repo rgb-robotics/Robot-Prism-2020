@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -8,17 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
 
-public class IntakeCommand_1 extends CommandBase {
-  
-  //Create local variables for the class here.
-  private static IntakeSubsystem m_intakeSubsystem;
-  private static boolean m_intakeStat = false; //true=run, false=stop
-
-  public IntakeCommand_1(IntakeSubsystem intakeSubsystem) {
-    m_intakeSubsystem = intakeSubsystem;
-    addRequirements(intakeSubsystem);
+public class FeederCommand extends CommandBase {
+  /**
+   * Creates a new FeederCommand.
+   */
+  public FeederCommand() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -28,15 +24,7 @@ public class IntakeCommand_1 extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute(){
-    m_intakeStat = !m_intakeStat;
-    
-    if (m_intakeStat) {
-      m_intakeSubsystem.intakeRun();
-    } 
-    else {
-      m_intakeSubsystem.intakeStop();
-    }
+  public void execute() {
   }
 
   // Called once the command ends or is interrupted.

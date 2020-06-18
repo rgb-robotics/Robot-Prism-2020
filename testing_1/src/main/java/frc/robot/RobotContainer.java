@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.commands.DriveCommand;
@@ -18,6 +19,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.commands.IntakeCommand_1;
 import frc.robot.commands.IntakeCommand_2;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -32,9 +34,7 @@ public class RobotContainer {
   private static final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-
-  private static final IntakeCommand_1 m_intakeCommand_1 = new IntakeCommand_1(m_intakeSubsystem);
-  private static final IntakeCommand_2 m_intakeCommand_2 = new IntakeCommand_2(m_intakeSubsystem);
+  private static final FeederSubsystem m_feederSubsystem = new FeederSubsystem();
 
   //The robot's joystick(s) and controller(s) are defined here.
   public static final Joystick m_stick = new Joystick(Constants.ControllerPorts.kStickPort);
@@ -42,7 +42,7 @@ public class RobotContainer {
 
   //Create the button bindings here.
   JoystickButton controllerA = new JoystickButton(m_controller, 1);
-  //JoystickButton controllerRT = new JoystickButton(m_controller, 12);
+  JoystickButton controllerRT = new JoystickButton(m_controller, 12);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -62,8 +62,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //Configure the button bindings here.
-    controllerA.whenPressed(m_intakeCommand_1, false);
-    //controllerRT.whenPressed(m_intakeCommand_2, false);
+    controllerA.whenPressed(m_intakeSubsystem::intakeRunStop);
+    controllerRT.whenPressed(m_intakeSubsystem::intakeDownUp);
   }
 
 
