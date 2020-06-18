@@ -33,9 +33,16 @@ public class RobotContainer {
   private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
 
+  private static final IntakeCommand_1 m_intakeCommand_1 = new IntakeCommand_1(m_intakeSubsystem);
+  private static final IntakeCommand_2 m_intakeCommand_2 = new IntakeCommand_2(m_intakeSubsystem);
+
   //The robot's joystick(s) and controller(s) are defined here.
   public static final Joystick m_stick = new Joystick(Constants.ControllerPorts.kStickPort);
   public static final XboxController m_controller = new XboxController(Constants.ControllerPorts.kControllerPort);
+
+  //Create the button bindings here.
+  JoystickButton controllerA = new JoystickButton(m_controller, 1);
+  JoystickButton controllerRT = new JoystickButton(m_controller, 12);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -54,13 +61,9 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //Create the button bindings here.
-    JoystickButton controllerA = new JoystickButton(m_controller, 1);
-    JoystickButton controllerRT = new JoystickButton(m_controller, 12);
-
     //Configure the button bindings here.
-    controllerA.toggleWhenActive(new IntakeCommand_1());
-    controllerRT.toggleWhenActive(new IntakeCommand_2());
+    controllerA.whenActive(m_intakeCommand_1, false);
+    controllerRT.whenActive(m_intakeCommand_2, false);
   }
 
 

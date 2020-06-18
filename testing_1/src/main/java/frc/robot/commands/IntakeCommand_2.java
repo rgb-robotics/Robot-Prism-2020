@@ -16,9 +16,9 @@ public class IntakeCommand_2 extends CommandBase {
   private static IntakeSubsystem m_intakeSubsystem;
   private static boolean m_intakeElevationStat = false; //true=down, false=up
 
-  public IntakeCommand_2() {
+  public IntakeCommand_2(IntakeSubsystem intakeSubsystem) {
     
-    addRequirements(m_intakeSubsystem);
+    addRequirements(/*m_*/intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.

@@ -16,9 +16,9 @@ public class IntakeCommand_1 extends CommandBase {
   private static IntakeSubsystem m_intakeSubsystem;
   private static boolean m_intakeStat = false; //true=run, false=stop
 
-  public IntakeCommand_1() {
+  public IntakeCommand_1(IntakeSubsystem intakeSubsystem) {
 
-    addRequirements(m_intakeSubsystem);
+    addRequirements(/*m_*/intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.

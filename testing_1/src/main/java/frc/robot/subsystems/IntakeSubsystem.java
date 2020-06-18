@@ -32,29 +32,6 @@ public class IntakeSubsystem extends SubsystemBase {
     m_intakeSolenoid.set(Value.kForward);
   }
 
-
-  /*
-  public void intake(boolean intakeStat) {
-    if (intakeStat = true) {
-      m_intakeMotor.set(0.8);
-    } 
-    else {
-      m_intakeMotor.set(0);
-    }
-  }
-
-  public void intakeElevation(boolean intakeElevationStat) {
-    if (intakeElevationStat = true) {
-      m_intakeSolenoid.set(Value.kReverse);
-    }
-    else {
-      m_intakeSolenoid.set(Value.kForward);
-    }
-  }
-
-  
-  */
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
