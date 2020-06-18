@@ -17,7 +17,7 @@ public class IntakeCommand_2 extends CommandBase {
   private static boolean m_intakeElevationStat = false; //true=down, false=up
 
   public IntakeCommand_2(IntakeSubsystem intakeSubsystem) {
-    
+    m_intakeSubsystem = intakeSubsystem;
     addRequirements(/*m_*/intakeSubsystem);
   }
 

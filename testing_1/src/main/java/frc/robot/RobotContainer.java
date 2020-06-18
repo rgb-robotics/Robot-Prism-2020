@@ -42,7 +42,7 @@ public class RobotContainer {
 
   //Create the button bindings here.
   JoystickButton controllerA = new JoystickButton(m_controller, 1);
-  JoystickButton controllerRT = new JoystickButton(m_controller, 12);
+  //JoystickButton controllerRT = new JoystickButton(m_controller, 12);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -63,7 +63,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //Configure the button bindings here.
     controllerA.whenActive(m_intakeCommand_1, false);
-    controllerRT.whenActive(m_intakeCommand_2, false);
+    //controllerRT.whenActive(m_intakeCommand_2, false);
   }
 
 

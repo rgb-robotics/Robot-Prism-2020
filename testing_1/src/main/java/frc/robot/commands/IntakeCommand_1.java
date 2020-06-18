@@ -17,7 +17,7 @@ public class IntakeCommand_1 extends CommandBase {
   private static boolean m_intakeStat = false; //true=run, false=stop
 
   public IntakeCommand_1(IntakeSubsystem intakeSubsystem) {
-
+    m_intakeSubsystem = intakeSubsystem;
     addRequirements(/*m_*/intakeSubsystem);
   }
 
