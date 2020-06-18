@@ -18,7 +18,7 @@ public class IntakeCommand_2 extends CommandBase {
 
   public IntakeCommand_2(IntakeSubsystem intakeSubsystem) {
     m_intakeSubsystem = intakeSubsystem;
-    addRequirements(/*m_*/intakeSubsystem);
+    addRequirements(intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.

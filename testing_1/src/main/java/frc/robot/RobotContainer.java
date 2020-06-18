@@ -62,8 +62,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //Configure the button bindings here.
-    controllerA.whenActive(m_intakeCommand_1, false);
-    //controllerRT.whenActive(m_intakeCommand_2, false);
+    controllerA.whenPressed(m_intakeCommand_1, false);
+    //controllerRT.whenPressed(m_intakeCommand_2, false);
   }
 
 
