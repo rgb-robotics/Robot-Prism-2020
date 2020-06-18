@@ -37,6 +37,7 @@ public class IntakeCommand_1 extends CommandBase {
     else {
       m_intakeSubsystem.intakeStop();
     }
+    System.out.println(m_intakeStat);
   }
 
   // Called once the command ends or is interrupted.
