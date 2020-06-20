@@ -16,11 +16,10 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.commands.IntakeCommand_1;
-import frc.robot.commands.IntakeCommand_2;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -41,8 +40,11 @@ public class RobotContainer {
   public static final XboxController m_controller = new XboxController(Constants.ControllerPorts.kControllerPort);
 
   //Create the button bindings here.
-  JoystickButton controllerA = new JoystickButton(m_controller, 1);
-  JoystickButton controllerRT = new JoystickButton(m_controller, 12);
+  JoystickButton m_controllerA = new JoystickButton(m_controller, 1);
+  Trigger m_controllerRT = new Trigger(() -> m_controller.getTriggerAxis(GenericHID.Hand.kRight) > 0.9);
+  JoystickButton m_joystick1 = new JoystickButton(m_stick, 1);
+  JoystickButton m_joystick3 = new JoystickButton(m_stick, 3);
+  JoystickButton m_joystick4 = new JoystickButton(m_stick, 4);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -50,7 +52,7 @@ public class RobotContainer {
   public RobotContainer() {
     //Set the default commands here. Configure the button bindings here.
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, () -> m_stick.getThrottle(), () -> -m_stick.getY(), () -> m_stick.getX()));
-    
+
     configureButtonBindings();
   }
 
@@ -62,8 +64,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //Configure the button bindings here.
-    controllerA.whenPressed(m_intakeSubsystem::intakeRunStop);
-    controllerRT.whenPressed(m_intakeSubsystem::intakeDownUp);
+    m_controllerA.whenPressed(m_intakeSubsystem::intakeRunStop);
+    m_controllerRT.whenActive(m_intakeSubsystem::intakeDownUp);
+    m_joystick3.whenPressed(m_feederSubsystem::feederUp);
+    m_joystick4.whenPressed(m_feederSubsystem::feederDown);
+    m_joystick1.whenPressed(m_feederSubsystem::feederStopperUpDown);
   }
 
 

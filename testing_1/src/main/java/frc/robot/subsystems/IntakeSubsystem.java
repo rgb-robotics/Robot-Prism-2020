@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;;
 
 public class IntakeSubsystem extends SubsystemBase {
 
   private final Spark m_intakeMotor;
+  
   private final DoubleSolenoid m_intakeSolenoid;
   
   private static boolean m_intakeStat;//true=run, false=stop
@@ -23,6 +23,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public IntakeSubsystem() {
     m_intakeMotor = new Spark(Constants.IntakeMotorPorts.kIntakeMotor);
+
     m_intakeSolenoid = new DoubleSolenoid(Constants.SolenoidPorts.kIntakeSolenoidForwardChannel, Constants.SolenoidPorts.kIntakeSolenoidReverseChannel);
 
     m_intakeStat = false;
@@ -49,11 +50,11 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void intakeDown() {
-    m_intakeSolenoid.set(Value.kForward);
+    m_intakeSolenoid.set(DoubleSolenoid.Value.kForward);
     m_intakeElevationStat = true;
   }
   public void intakeUp() {
-    m_intakeSolenoid.set(Value.kReverse);
+    m_intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
     m_intakeElevationStat = false;
   }
   public void intakeDownUp() {

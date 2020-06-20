@@ -17,16 +17,28 @@ import edu.wpi.first.wpilibj.Encoder;
 
 public class DriveSubsystem extends SubsystemBase {
 
-  private final SpeedControllerGroup m_leftMotors;
-  private final SpeedControllerGroup m_rightMotors;
+  private final Spark m_driveLeftMotor1;
+  private final Spark m_driveLeftMotor2;
+  private final Spark m_driveLeftMotor3;
+  private final Spark m_driveRightMotor1;
+  private final Spark m_driveRightMotor2;
+  private final Spark m_driveRightMotor3;
+  private final SpeedControllerGroup m_driveLeftMotors;
+  private final SpeedControllerGroup m_driveRightMotors;
   private final DifferentialDrive m_drive;
   private final Encoder m_leftEncoder;
   private final Encoder m_rightEncoder;
 
   public DriveSubsystem() {
-    m_leftMotors = new SpeedControllerGroup(new Spark(Constants.DriveMotorPorts.kLeftMotor1), new Spark(Constants.DriveMotorPorts.kLeftMotor2), new Spark(Constants.DriveMotorPorts.kLeftMotor3));
-    m_rightMotors = new SpeedControllerGroup(new Spark(Constants.DriveMotorPorts.kRightMotor1), new Spark(Constants.DriveMotorPorts.kRightMotor2), new Spark(Constants.DriveMotorPorts.kRightMotor3));
-    m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+    m_driveLeftMotor1 = new Spark(Constants.DriveMotorPorts.kDriveLeftMotor1);
+    m_driveLeftMotor2 = new Spark(Constants.DriveMotorPorts.kDriveLeftMotor2);
+    m_driveLeftMotor3 = new Spark(Constants.DriveMotorPorts.kDriveLeftMotor3);
+    m_driveRightMotor1 = new Spark(Constants.DriveMotorPorts.kDriveRightMotor1);
+    m_driveRightMotor2 = new Spark(Constants.DriveMotorPorts.kDriveRightMotor2);
+    m_driveRightMotor3 = new Spark(Constants.DriveMotorPorts.kDriveRightMotor3);
+    m_driveLeftMotors = new SpeedControllerGroup(m_driveLeftMotor1, m_driveLeftMotor2, m_driveLeftMotor3);
+    m_driveRightMotors = new SpeedControllerGroup(m_driveRightMotor1, m_driveRightMotor2, m_driveRightMotor3);
+    m_drive = new DifferentialDrive(m_driveLeftMotors, m_driveRightMotors);
     m_leftEncoder = new Encoder(Constants.EncoderPorts.kDriveLeftEncoderA, Constants.EncoderPorts.kDriveLeftEncoderB, false, EncodingType.k4X);
     m_rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
   }
@@ -36,6 +48,7 @@ public class DriveSubsystem extends SubsystemBase {
       m_drive.arcadeDrive(speed * scale, rotation * scale);
     } else {
       m_drive.arcadeDrive(0, 0);
+      //write stop encoder reading here.
     }
   }
 

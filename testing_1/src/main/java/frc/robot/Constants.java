@@ -19,17 +19,25 @@ public final class Constants {
    
   public static final class DriveMotorPorts {
     //drive motor PWM ports
-    public static final int kLeftMotor1 = 1;
-    public static final int kLeftMotor2 = 2;
-    public static final int kLeftMotor3 = 3;
-    public static final int kRightMotor1 = 4;
-    public static final int kRightMotor2 = 5;
-    public static final int kRightMotor3 = 6;  
+    public static final int kDriveLeftMotor1 = 1;
+    public static final int kDriveLeftMotor2 = 2;
+    public static final int kDriveLeftMotor3 = 3;
+    public static final int kDriveRightMotor1 = 4;
+    public static final int kDriveRightMotor2 = 5;
+    public static final int kDriveRightMotor3 = 6;  
   }
 
   public static final class IntakeMotorPorts {
     //intake motor PWM ports
     public static final int kIntakeMotor = 0;
+  }
+
+  public static final class FeederMotorPorts {
+    //feeder mototr PWM ports
+    public static final int kFeederLeftMotor = 7;
+    public static final int kFeederRightMotor = 8;
+  
+    //not confirmed
   }
 
   public static final class EncoderPorts {
@@ -44,6 +52,8 @@ public final class Constants {
     //soilenoid PCM channels
     public static final int kIntakeSolenoidForwardChannel = 0;
     public static final int kIntakeSolenoidReverseChannel = 1;
+    public static final int kFeederStopperSolenoidForwardChannel = 2;
+    public static final int kFeederStopperSolenoidReverseChannel = 3;
   }
 
   public static final class ControllerPorts {
