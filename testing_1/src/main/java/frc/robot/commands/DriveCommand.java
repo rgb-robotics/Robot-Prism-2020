@@ -26,7 +26,7 @@ public class DriveCommand extends CommandBase {
     m_speed = speed;
     m_rotation = rotation;
 
-    addRequirements(driveSubsystem);
+    addRequirements(m_driveSubsystem);
   }
 
   // Called when the command is initially scheduled.

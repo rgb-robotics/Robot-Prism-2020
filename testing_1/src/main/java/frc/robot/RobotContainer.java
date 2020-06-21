@@ -10,16 +10,18 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.FeederSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -40,9 +42,10 @@ public class RobotContainer {
   public static final XboxController m_controller = new XboxController(Constants.ControllerPorts.kControllerPort);
 
   //Create the button bindings here.
-  JoystickButton m_controllerA = new JoystickButton(m_controller, 1);
+  JoystickButton m_controllerA = new JoystickButton(m_controller, XboxController.Button.kA.value);
+  JoystickButton m_controllerB = new JoystickButton(m_controller, XboxController.Button.kB.value);
   Trigger m_controllerRT = new Trigger(() -> m_controller.getTriggerAxis(GenericHID.Hand.kRight) > 0.9);
-  JoystickButton m_joystick1 = new JoystickButton(m_stick, 1);
+  JoystickButton m_joystick1 = new JoystickButton(m_stick, Joystick.ButtonType.kTrigger.value);
   JoystickButton m_joystick3 = new JoystickButton(m_stick, 3);
   JoystickButton m_joystick4 = new JoystickButton(m_stick, 4);
 
@@ -68,6 +71,8 @@ public class RobotContainer {
     m_controllerRT.whenActive(m_intakeSubsystem::intakeDownUp);
     m_joystick3.whenPressed(m_feederSubsystem::feederUp);
     m_joystick4.whenPressed(m_feederSubsystem::feederDown);
+    //try .whenHeld
+    m_joystick3.or(m_joystick4).whenInactive(m_feederSubsystem::feederStop);
     m_joystick1.whenPressed(m_feederSubsystem::feederStopperUpDown);
   }
 

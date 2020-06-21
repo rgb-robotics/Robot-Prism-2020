@@ -40,6 +40,9 @@ public class FeederSubsystem extends SubsystemBase {
   public void feederDown() {
     m_feederMotors.set(-0.4);
   }
+  public void feederStop() {
+    m_feederMotors.stopMotor();
+  }
 
   public void feederStopperUp() {
     m_feederStopperSolenoid.set(DoubleSolenoid.Value.kForward);
