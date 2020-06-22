@@ -38,6 +38,8 @@ public class RobotContainer {
   private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private static final FeederSubsystem m_feederSubsystem = new FeederSubsystem();
+  private static final FeederUpCommand m_feederUpCommand = new FeederUpCommand(m_feederSubsystem);
+  private static final FeederDownCommand m_feederDownCommand = new FeederDownCommand(m_feederSubsystem);
 
   //The robot's joystick(s) and controller(s) are defined here.
   public static final Joystick m_stick = new Joystick(Constants.ControllerPorts.kStickPort);
@@ -71,10 +73,13 @@ public class RobotContainer {
     //Configure the button bindings here.
     m_controllerA.whenPressed(m_intakeSubsystem::intakeRunStop);
     m_controllerRT.whenActive(m_intakeSubsystem::intakeDownUp);
-    m_joystick3.whenPressed(m_feederSubsystem::feederUp);
-    m_joystick4.whenPressed(m_feederSubsystem::feederDown);
+    //m_joystick3.whenPressed(m_feederSubsystem::feederUp);
+    //m_joystick4.whenPressed(m_feederSubsystem::feederDown);
+    //m_joystick3.or(m_joystick4).whenInactive(m_feederSubsystem::feederStop);
+    
     //try .whenHeld
-    m_joystick3.or(m_joystick4).whenInactive(m_feederSubsystem::feederStop);
+    m_joystick3.whenHeld(m_feederUpCommand);
+    m_joystick4.whenHeld(m_feederDownCommand);
     m_joystick1.whenPressed(m_feederSubsystem::feederStopperUpDown);
   }
 
