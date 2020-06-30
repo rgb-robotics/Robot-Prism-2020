@@ -15,16 +15,16 @@ public class DriveCommand extends CommandBase {
 
   //Create local variables for the class here.
   private static DriveSubsystem m_driveSubsystem;
-  private static Double/*Supplier*/ m_scale;
-  private static Double/*Supplier*/ m_speed;
-  private static Double/*Supplier*/ m_rotation;
+  private static DoubleSupplier m_scale;
+  private static DoubleSupplier m_speed;
+  private static DoubleSupplier m_rotation;
 
   //Define the local variables to be the value of the instance variables.
-  public DriveCommand(DriveSubsystem driveSubsystem, Double/*Supplier*/ scale, Double/*Supplier*/ speed, Double/*Supplier*/ rotation) {
+  public DriveCommand(DriveSubsystem driveSubsystem, DoubleSupplier speed, DoubleSupplier rotation, DoubleSupplier scale) {
     m_driveSubsystem = driveSubsystem;
-    m_scale = scale;
     m_speed = speed;
     m_rotation = rotation;
+    m_scale = scale;
 
     addRequirements(m_driveSubsystem);
   }
@@ -38,7 +38,7 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-    m_driveSubsystem.drive(-m_speed/*.getAsDouble()*/, m_rotation/*.getAsDouble()*/, m_scale/*.getAsDouble()*/);
+    m_driveSubsystem.drive(-m_speed.getAsDouble(), m_rotation.getAsDouble(), m_scale.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

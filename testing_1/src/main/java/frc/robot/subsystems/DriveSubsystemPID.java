@@ -7,15 +7,17 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.Encoder;
 
-public class DriveSubsystem extends SubsystemBase {
+public class DriveSubsystemPID extends PIDSubsystem{
 
   private final Spark m_driveLeftMotor1;
   private final Spark m_driveLeftMotor2;
@@ -29,7 +31,9 @@ public class DriveSubsystem extends SubsystemBase {
   private final Encoder m_leftEncoder;
   private final Encoder m_rightEncoder;
 
-  public DriveSubsystem() {
+  public DriveSubsystemPID() {
+    super(new PIDController(Constants.PIDConstants.DriveSubsystem1.kP , Constants.PIDConstants.DriveSubsystem1.kI, Constants.PIDConstants.DriveSubsystem1.kD));
+
     m_driveLeftMotor1 = new Spark(Constants.DriveMotorPorts.kDriveLeftMotor1);
     m_driveLeftMotor2 = new Spark(Constants.DriveMotorPorts.kDriveLeftMotor2);
     m_driveLeftMotor3 = new Spark(Constants.DriveMotorPorts.kDriveLeftMotor3);
@@ -43,21 +47,17 @@ public class DriveSubsystem extends SubsystemBase {
     m_rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
   }
 
-  public void drive(double speed, double rotation, double scale) {
-    if (m_leftEncoder.getDistance() < 5000) {
-      m_drive.arcadeDrive(speed * scale, rotation * scale);
-    } else {
-      m_drive.arcadeDrive(0, 0);
-      //write stop encoder reading here.
-      //m_leftEncoder.stop();?
-    }
+  @Override
+  protected void useOutput(double output, double setpoint) {
+    double error = setpoint - getMeasurement();
+    output = Constants.PIDConstants.DriveSubsystem1.kP * error;
+
+    m_drive.tankDrive(output, output);
   }
 
-  public double getDistanceDriven() {
-    double distanceDriven = m_leftEncoder.getDistance();
-    //double distanceDriven = (m_leftEncoder.getDistance() + m_rightEncoder.getDistance()) / 2;
-
-    return distanceDriven;
+  @Override
+  protected double getMeasurement() {
+    return m_leftEncoder.getDistance();
   }
 
   public void resetEncoders() {

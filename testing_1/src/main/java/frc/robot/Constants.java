@@ -56,8 +56,8 @@ public final class Constants {
     public static final int kFeederStopperSolenoidReverseChannel = 3;
   }
 
-  public static final class ControllerPorts {
-    //controller ports
+  public static final class OIConstants {
+    //controller ports (Driver Station)
     public static final int kStickPort = 0;
     public static final int kControllerPort = 1;
   }
@@ -69,5 +69,19 @@ public final class Constants {
     public static final double kDriveEncoderCPR = 256;
     //public static final double kDriveGearBoxGR = ?;
     public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) /** kDriveGearBoxGR*/;
+  }
+
+  public static final class PIDConstants {
+    //kP, kI, kD
+    public static final class DriveSubsystem1 {
+      public static final double kP = 0;
+      public static final double kI = 0;
+      public static final double kD = 0;
+    }
+    public static final class ShooterSubsystem {
+      public static final double kP = 0;
+      public static final double kI = 0;
+      public static final double kD = 0;
+    }
   }
 }
