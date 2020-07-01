@@ -12,8 +12,9 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+
 
 public class DriveSubsystem extends SubsystemBase {
 
@@ -26,8 +27,8 @@ public class DriveSubsystem extends SubsystemBase {
   private final SpeedControllerGroup m_driveLeftMotors;
   private final SpeedControllerGroup m_driveRightMotors;
   private final DifferentialDrive m_drive;
-  private final Encoder m_leftEncoder;
-  private final Encoder m_rightEncoder;
+  private final Encoder m_driveLeftEncoder;
+  private final Encoder m_driveRightEncoder;
 
   public DriveSubsystem() {
     m_driveLeftMotor1 = new Spark(Constants.DriveMotorPorts.kDriveLeftMotor1);
@@ -39,32 +40,27 @@ public class DriveSubsystem extends SubsystemBase {
     m_driveLeftMotors = new SpeedControllerGroup(m_driveLeftMotor1, m_driveLeftMotor2, m_driveLeftMotor3);
     m_driveRightMotors = new SpeedControllerGroup(m_driveRightMotor1, m_driveRightMotor2, m_driveRightMotor3);
     m_drive = new DifferentialDrive(m_driveLeftMotors, m_driveRightMotors);
-    m_leftEncoder = new Encoder(Constants.EncoderPorts.kDriveLeftEncoderA, Constants.EncoderPorts.kDriveLeftEncoderB, false, EncodingType.k4X);
-    m_rightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
+    m_driveLeftEncoder = new Encoder(Constants.EncoderPorts.kDriveLeftEncoderA, Constants.EncoderPorts.kDriveLeftEncoderB, false, EncodingType.k4X);
+    m_driveRightEncoder = new Encoder(Constants.EncoderPorts.kDriveRightEncoderA, Constants.EncoderPorts.kDriveRightEncoderB, true, EncodingType.k4X);
+
+    m_driveLeftEncoder.setDistancePerPulse(Constants.EncoderConstants.DriveEncoderConstants.kDriveEncoderDPP);
+    m_driveRightEncoder.setDistancePerPulse(Constants.EncoderConstants.DriveEncoderConstants.kDriveEncoderDPP);
   }
 
   public void drive(double speed, double rotation, double scale) {
-    if (m_leftEncoder.getDistance() < 5000) {
       m_drive.arcadeDrive(speed * scale, rotation * scale);
-    } else {
-      m_drive.arcadeDrive(0, 0);
-      //write stop encoder reading here.
-      //m_leftEncoder.stop();?
-    }
   }
 
   public double getDistanceDriven() {
-    double distanceDriven = m_leftEncoder.getDistance();
-    //double distanceDriven = (m_leftEncoder.getDistance() + m_rightEncoder.getDistance()) / 2;
+    double distanceDriven = m_driveLeftEncoder.getDistance();
+    //double distanceDriven = (m_driveLeftEncoder.getDistance() + m_driveRightEncoder.getDistance()) / 2;
 
     return distanceDriven;
   }
 
   public void resetEncoders() {
-    m_leftEncoder.setDistancePerPulse(Constants.EncoderConstants.kDriveEncoderDPP);
-    m_rightEncoder.setDistancePerPulse(Constants.EncoderConstants.kDriveEncoderDPP);
-    m_leftEncoder.reset();
-    m_rightEncoder.reset();
+    m_driveLeftEncoder.reset();
+    m_driveRightEncoder.reset();
   }
 
   @Override

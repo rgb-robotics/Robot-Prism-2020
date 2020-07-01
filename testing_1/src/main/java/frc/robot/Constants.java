@@ -36,8 +36,6 @@ public final class Constants {
     //feeder mototr PWM ports
     public static final int kFeederLeftMotor = 7;
     public static final int kFeederRightMotor = 8;
-  
-    //not confirmed
   }
 
   public static final class EncoderPorts {
@@ -46,6 +44,8 @@ public final class Constants {
     public static final int kDriveLeftEncoderB = 2;
     public static final int kDriveRightEncoderA = 3;
     public static final int kDriveRightEncoderB = 4;
+    public static final int kShooterEncoderA = 5;
+    public static final int kShooterEncoderB = 6;
   }
 
   public static final class SolenoidPorts {
@@ -56,7 +56,7 @@ public final class Constants {
     public static final int kFeederStopperSolenoidReverseChannel = 3;
   }
 
-  public static final class OIConstants {
+  public static final class OIPorts {
     //controller ports (Driver Station)
     public static final int kStickPort = 0;
     public static final int kControllerPort = 1;
@@ -65,10 +65,21 @@ public final class Constants {
   public static final class EncoderConstants {
     //encoder distance per pulse
     //DPR=distance per revolution, CPR=counts per revolution, DPP=distance per pulse, GR=gear ratio
-    public static final double kDriveEncoderDPR = 6 * Math.PI;
-    public static final double kDriveEncoderCPR = 256;
-    //public static final double kDriveGearBoxGR = ?;
-    public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) /** kDriveGearBoxGR*/;
+    
+    public static final class DriveEncoderConstants {
+      public static final double kDriveEncoderDPR = 6 * Math.PI;
+      public static final double kDriveEncoderCPR = 256;
+      //public static final double kDriveGearBoxGR = ?;
+      public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) /** kDriveGearBoxGR*/;
+    }
+    
+    public static final class ShooterEncoderConstants {
+      //TODO
+      //public static final double kDriveEncoderDPR = ?;
+      //public static final double kDriveEncoderCPR = ?;
+      //public static final double kDriveGearBoxGR = ?;
+      //public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) /** kDriveGearBoxGR*/;
+    }
   }
 
   public static final class PIDConstants {
