@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.commands.DriveCommand;
+//import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -34,20 +34,26 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  //The robot's subsystems are initialized here.
+  //The robot's subsystems are declared here.
   private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private static final FeederSubsystem m_feederSubsystem = new FeederSubsystem();
   private static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
 
-  //The robot's commands are initialized here.
+  //The robot's commands are declared here.
   private static final PIDCommand m_driveDistanceCommand = new PIDCommand(new PIDController(Constants.PIDConstants.DriveSubsystem1.kP, Constants.PIDConstants.DriveSubsystem1.kI, Constants.PIDConstants.DriveSubsystem1.kD), m_driveSubsystem::getDistanceDriven, 0, output -> m_driveSubsystem.drive(output, 0, 1), m_driveSubsystem);
+  private static final StartEndCommand m_intakeRunStop = new StartEndCommand(m_intakeSubsystem::intakeRun, m_intakeSubsystem::intakeStop, m_intakeSubsystem);
+  private static final StartEndCommand m_intakeDownUp = new StartEndCommand(m_intakeSubsystem::intakeDown, m_intakeSubsystem::intakeUp, m_intakeSubsystem);
+  private static final StartEndCommand m_feederUp = new StartEndCommand(m_feederSubsystem::feederUp, m_feederSubsystem::feederStop, m_feederSubsystem);
+  private static final StartEndCommand m_feederDown = new StartEndCommand(m_feederSubsystem::feederDown, m_feederSubsystem::feederStop, m_feederSubsystem);
+  private static final InstantCommand m_feederStopperUpDown = new InstantCommand(m_feederSubsystem::feederStopperUpDown, m_feederSubsystem); 
+  private static final StartEndCommand m_shooterRunStop = new StartEndCommand(m_shooterSubsystem::enable, m_shooterSubsystem::disable, m_shooterSubsystem);
 
-  //The robot's joystick(s) and controller(s) are initialized here.
+  //The robot's joystick(s) and controller(s) are declared here.
   public static final Joystick m_stick = new Joystick(Constants.OIPorts.kStickPort);
   public static final XboxController m_controller = new XboxController(Constants.OIPorts.kControllerPort);
 
-  //The robot's buttons are initialized here.
+  //The robot's buttons are declared here.
   JoystickButton m_controllerA = new JoystickButton(m_controller, XboxController.Button.kA.value);
   JoystickButton m_controllerB = new JoystickButton(m_controller, XboxController.Button.kB.value);
   Trigger m_controllerRT = new Trigger(() -> m_controller.getTriggerAxis(GenericHID.Hand.kRight) > 0.9);
@@ -59,7 +65,6 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    //Set the default commands here. Configure the button bindings here.
     //m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, () -> -m_stick.getY(), () -> m_stick.getX(), () -> m_stick.getThrottle()));
     //TODO If the RunCommand below works, then delete the DriveCommand. And then initializes the command instead of anonymous.
     m_driveSubsystem.setDefaultCommand(new RunCommand(() -> m_driveSubsystem.drive(-m_stick.getY(), m_stick.getX(), m_stick.getThrottle())));
@@ -74,28 +79,17 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //TODO initialized all "commands" below
-
     //Configure the button bindings here.
-    m_controllerA.whenPressed(m_intakeSubsystem::intakeRunStop);
-    m_controllerRT.whenActive(m_intakeSubsystem::intakeDownUp);
+    m_controllerA.toggleWhenPressed(m_intakeRunStop);
+    m_controllerRT.toggleWhenActive(m_intakeDownUp);
 
-    //TODO test the feeder
-    //m_joystick3.whenPressed(new InstantCommand(m_feederSubsystem::feederUp/*, m_feederSubsystem*/)).whenReleased(m_feederSubsystem::feederStop);
-    //m_joystick4.whenPressed(new InstantCommand(m_feederSubsystem::feederDown/*, m_feederSubsystem*/)).whenReleased(m_feederSubsystem::feederStop);
-    m_joystick3.whenHeld(new StartEndCommand(m_feederSubsystem::feederUp, m_feederSubsystem::feederStop, m_feederSubsystem));
-    m_joystick4.whenHeld(new StartEndCommand(m_feederSubsystem::feederDown, m_feederSubsystem::feederStop, m_feederSubsystem));
-    m_joystick1.whenPressed(m_feederSubsystem::feederStopperUpDown);
+    m_joystick3.whenHeld(m_feederUp);
+    m_joystick4.whenHeld(m_feederDown);
+    m_joystick1.whenPressed(m_feederStopperUpDown);
 
-    m_controllerB.whenHeld(new StartEndCommand(m_shooterSubsystem::enable, m_shooterSubsystem::disable, m_shooterSubsystem));
+    m_controllerB.toggleWhenPressed(m_shooterRunStop);
   }
 
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
     return m_driveDistanceCommand;
   }

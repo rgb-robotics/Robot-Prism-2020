@@ -32,22 +32,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void intakeRun() {
     m_intakeMotor.set(0.8);
-    m_intakeStat = true;
   }
   public void intakeStop() {
     m_intakeMotor.set(0);
-    m_intakeStat = false;
   }
-  public void intakeRunStop() {
-    m_intakeStat = !m_intakeStat;
-    
-    if (m_intakeStat) {
-      intakeRun();
-    } 
-    else {
-      intakeStop();
-    }
-  }
+  
 
   public void intakeDown() {
     m_intakeSolenoid.set(DoubleSolenoid.Value.kForward);
