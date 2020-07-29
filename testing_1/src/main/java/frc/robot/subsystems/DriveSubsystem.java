@@ -47,8 +47,10 @@ public class DriveSubsystem extends SubsystemBase {
     m_driveRightEncoder.setDistancePerPulse(Constants.EncoderConstants.DriveEncoderConstants.kDriveEncoderDPP);
   }
 
-  public void drive(double speed, double rotation, double scale) {
-      m_drive.arcadeDrive(speed * scale, rotation * scale);
+  public void drive(double speed, double rotation, double throttle) {
+    double scale = (throttle * -0.125) + 0.675;
+    
+    m_drive.arcadeDrive(speed * scale, rotation * scale);
   }
 
   public double getDistanceDriven() {
@@ -65,6 +67,5 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

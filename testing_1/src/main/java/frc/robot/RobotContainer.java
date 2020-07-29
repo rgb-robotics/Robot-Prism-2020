@@ -18,14 +18,19 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ShooterSubsystemForTesting;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.ProfiledPIDController;
+import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -39,9 +44,11 @@ public class RobotContainer {
   private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private static final FeederSubsystem m_feederSubsystem = new FeederSubsystem();
   private static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private static final ShooterSubsystemForTesting m_shooterSubsystemForTesting = new ShooterSubsystemForTesting();
 
   //The robot's commands are declared here.
-  private static final PIDCommand m_driveDistanceCommand = new PIDCommand(new PIDController(Constants.PIDConstants.DriveSubsystem1.kP, Constants.PIDConstants.DriveSubsystem1.kI, Constants.PIDConstants.DriveSubsystem1.kD), m_driveSubsystem::getDistanceDriven, 0, output -> m_driveSubsystem.drive(output, 0, 1), m_driveSubsystem);
+  private static final SequentialCommandGroup m_driveDistanceCommandPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem::resetEncoders, m_driveSubsystem), new PIDCommand(new PIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD), m_driveSubsystem::getDistanceDriven, 0, output -> m_driveSubsystem.drive(output, 0, -1), m_driveSubsystem));
+  private static final SequentialCommandGroup m_driveDistanceCommandMPPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem::resetEncoders, m_driveSubsystem), new ProfiledPIDCommand(new ProfiledPIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD, new TrapezoidProfile.Constraints(0, 0)), m_driveSubsystem::getDistanceDriven, 0, (output, setpoint) -> m_driveSubsystem.drive(output, 0, -1), m_driveSubsystem));
   private static final StartEndCommand m_intakeRunStop = new StartEndCommand(m_intakeSubsystem::intakeRun, m_intakeSubsystem::intakeStop, m_intakeSubsystem);
   private static final StartEndCommand m_intakeDownUp = new StartEndCommand(m_intakeSubsystem::intakeDown, m_intakeSubsystem::intakeUp, m_intakeSubsystem);
   private static final StartEndCommand m_feederUp = new StartEndCommand(m_feederSubsystem::feederUp, m_feederSubsystem::feederStop, m_feederSubsystem);
@@ -91,6 +98,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return m_driveDistanceCommand;
+    return m_driveDistanceCommandPID;
+    //return m_driveDistanceCommandMPPID;
   }
 }

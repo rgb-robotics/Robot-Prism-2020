@@ -84,7 +84,7 @@ public final class Constants {
 
   public static final class PIDConstants {
     //kP, kI, kD
-    public static final class DriveSubsystem1 {
+    public static final class DriveSubsystem {
       public static final double kP = 0;
       public static final double kI = 0;
       public static final double kD = 0;
@@ -93,6 +93,14 @@ public final class Constants {
       public static final double kP = 0;
       public static final double kI = 0;
       public static final double kD = 0;
+    }
+  }
+
+  public static final class FeedforwardConstants {
+    public static final class ShooterSubsystem {
+      public static final double kS = 0;
+      public static final double kV = 0;
+      public static final double kA = 0;
     }
   }
 }
