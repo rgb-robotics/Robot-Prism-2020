@@ -75,10 +75,10 @@ public final class Constants {
     
     public static final class ShooterEncoderConstants {
       //TODO
-      //public static final double kDriveEncoderDPR = ?;
-      //public static final double kDriveEncoderCPR = ?;
-      //public static final double kDriveGearBoxGR = ?;
-      //public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) /** kDriveGearBoxGR*/;
+      //public static final double kShooterEncoderDPR = ?;
+      public static final double kShooterEncoderCPR = 256;
+      //public static final double kShooterGearBoxGR = ?;
+      //public static final double kShooterEncoderDPP = (kShooterEncoderDPR / kShooterEncoderCPR) /** kShooterGearBoxGR*/;
     }
   }
 
@@ -97,6 +97,12 @@ public final class Constants {
   }
 
   public static final class FeedforwardConstants {
+    //kS, kV, kA
+    public static final class DriveSubsystem {
+      public static final double kS = 0;
+      public static final double kV = 0;
+      public static final double kA = 0;
+    }
     public static final class ShooterSubsystem {
       public static final double kS = 0;
       public static final double kV = 0;

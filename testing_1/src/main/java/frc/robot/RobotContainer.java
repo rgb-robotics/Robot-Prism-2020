@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.DriveSubsystem_FF;
 //import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.FeederSubsystem;
@@ -39,26 +40,32 @@ import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  //The robot's joystick(s) and controller(s) are declared here.
+  public static final Joystick m_stick = new Joystick(Constants.OIPorts.kStickPort);
+  public static final XboxController m_controller = new XboxController(Constants.OIPorts.kControllerPort);
+
   //The robot's subsystems are declared here.
   private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  private static final DriveSubsystem_FF m_driveSubsystem_FF = new DriveSubsystem_FF();
   private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private static final FeederSubsystem m_feederSubsystem = new FeederSubsystem();
   private static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private static final ShooterSubsystemForTesting m_shooterSubsystemForTesting = new ShooterSubsystemForTesting();
 
   //The robot's commands are declared here.
-  private static final SequentialCommandGroup m_driveDistanceCommandPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem::resetEncoders, m_driveSubsystem), new PIDCommand(new PIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD), m_driveSubsystem::getDistanceDriven, 0, output -> m_driveSubsystem.drive(output, 0, -1), m_driveSubsystem));
-  private static final SequentialCommandGroup m_driveDistanceCommandMPPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem::resetEncoders, m_driveSubsystem), new ProfiledPIDCommand(new ProfiledPIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD, new TrapezoidProfile.Constraints(0, 0)), m_driveSubsystem::getDistanceDriven, 0, (output, setpoint) -> m_driveSubsystem.drive(output, 0, -1), m_driveSubsystem));
+  private static final RunCommand m_arcadeDrive = new RunCommand(() -> m_driveSubsystem.drive(-m_stick.getY(), m_stick.getX(), m_stick.getThrottle()));
+  //private static final SequentialCommandGroup m_driveDistanceCommandPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem::resetEncoders, m_driveSubsystem), new PIDCommand(new PIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD), m_driveSubsystem::getDistanceDriven, 24, output -> m_driveSubsystem.drive(output, 0, -1), m_driveSubsystem));
+  //private static final SequentialCommandGroup m_driveDistanceCommandMPPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem::resetEncoders, m_driveSubsystem), new ProfiledPIDCommand(new ProfiledPIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD, new TrapezoidProfile.Constraints(0, 0)), m_driveSubsystem::getDistanceDriven, 24, (output, setpoint) -> m_driveSubsystem.drive(output, 0, -1), m_driveSubsystem));
+  //private static final SequentialCommandGroup m_driveDistanceCommandPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem_FF::resetEncoders, m_driveSubsystem_FF), new PIDCommand(new PIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD), m_driveSubsystem_FF::getDistanceDriven, 24, output -> m_driveSubsystem_FF.arcadeDrive(output, 0, -1), m_driveSubsystem_FF));
+  private static final SequentialCommandGroup m_driveDistanceCommandMPPID = new ProfiledPIDCommand(new ProfiledPIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD, new TrapezoidProfile.Constraints(0, 0)), m_driveSubsystem_FF::getDistanceDriven, 24, (output, setpoint) -> m_driveSubsystem_FF.voltageDrive(m_driveSubsystem_FF.FFOutput(setpoint) + output, -m_driveSubsystem_FF.FFOutput(setpoint) - output), m_driveSubsystem).beforeStarting(m_driveSubsystem_FF::resetEncoders, m_driveSubsystem_FF);
   private static final StartEndCommand m_intakeRunStop = new StartEndCommand(m_intakeSubsystem::intakeRun, m_intakeSubsystem::intakeStop, m_intakeSubsystem);
   private static final StartEndCommand m_intakeDownUp = new StartEndCommand(m_intakeSubsystem::intakeDown, m_intakeSubsystem::intakeUp, m_intakeSubsystem);
   private static final StartEndCommand m_feederUp = new StartEndCommand(m_feederSubsystem::feederUp, m_feederSubsystem::feederStop, m_feederSubsystem);
   private static final StartEndCommand m_feederDown = new StartEndCommand(m_feederSubsystem::feederDown, m_feederSubsystem::feederStop, m_feederSubsystem);
-  private static final InstantCommand m_feederStopperUpDown = new InstantCommand(m_feederSubsystem::feederStopperUpDown, m_feederSubsystem); 
-  private static final StartEndCommand m_shooterRunStop = new StartEndCommand(m_shooterSubsystem::enable, m_shooterSubsystem::disable, m_shooterSubsystem);
+  private static final StartEndCommand m_feederStopperUpDown = new StartEndCommand(m_feederSubsystem::feederStopperDown, m_feederSubsystem::feederStopperUp, m_feederSubsystem); 
+  //private static final StartEndCommand m_shooterRunStop = new StartEndCommand(m_shooterSubsystem::enable, m_shooterSubsystem::disable, m_shooterSubsystem);
 
-  //The robot's joystick(s) and controller(s) are declared here.
-  public static final Joystick m_stick = new Joystick(Constants.OIPorts.kStickPort);
-  public static final XboxController m_controller = new XboxController(Constants.OIPorts.kControllerPort);
+  private static final StartEndCommand m_shooterRunStop = new StartEndCommand(m_shooterSubsystemForTesting::periodic, m_shooterSubsystemForTesting::stop, m_shooterSubsystemForTesting);
 
   //The robot's buttons are declared here.
   JoystickButton m_controllerA = new JoystickButton(m_controller, XboxController.Button.kA.value);
@@ -74,7 +81,7 @@ public class RobotContainer {
   public RobotContainer() {
     //m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, () -> -m_stick.getY(), () -> m_stick.getX(), () -> m_stick.getThrottle()));
     //TODO If the RunCommand below works, then delete the DriveCommand. And then initializes the command instead of anonymous.
-    m_driveSubsystem.setDefaultCommand(new RunCommand(() -> m_driveSubsystem.drive(-m_stick.getY(), m_stick.getX(), m_stick.getThrottle())));
+    m_driveSubsystem.setDefaultCommand(m_arcadeDrive);
   
     configureButtonBindings();
   }
@@ -92,13 +99,13 @@ public class RobotContainer {
 
     m_joystick3.whenHeld(m_feederUp);
     m_joystick4.whenHeld(m_feederDown);
-    m_joystick1.whenPressed(m_feederStopperUpDown);
+    m_joystick1.toggleWhenPressed(m_feederStopperUpDown);
 
     m_controllerB.toggleWhenPressed(m_shooterRunStop);
   }
 
   public Command getAutonomousCommand() {
-    return m_driveDistanceCommandPID;
-    //return m_driveDistanceCommandMPPID;
+    //return m_driveDistanceCommandPID;
+    return m_driveDistanceCommandMPPID;
   }
 }

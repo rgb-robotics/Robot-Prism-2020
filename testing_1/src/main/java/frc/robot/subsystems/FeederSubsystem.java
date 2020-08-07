@@ -12,26 +12,17 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class FeederSubsystem extends SubsystemBase {
 
-  private final Spark m_feederLeftMotor;
-  private final Spark m_feederRightMotor;
-  private final SpeedControllerGroup m_feederMotors;
+  private final Spark m_feederLeftMotor = new Spark(Constants.FeederMotorPorts.kFeederLeftMotor);
+  private final Spark m_feederRightMotor = new Spark(Constants.FeederMotorPorts.kFeederRightMotor);
+  private final SpeedControllerGroup m_feederMotors = new SpeedControllerGroup(m_feederLeftMotor, m_feederRightMotor);
 
-  private final DoubleSolenoid m_feederStopperSolenoid;
-
-  private static boolean m_feederStopperStat;
+  private final DoubleSolenoid m_feederStopperSolenoid = new DoubleSolenoid(2, 3);
 
   public FeederSubsystem() {
-    m_feederLeftMotor = new Spark(Constants.FeederMotorPorts.kFeederLeftMotor);
-    m_feederRightMotor = new Spark(Constants.FeederMotorPorts.kFeederRightMotor);
-    m_feederMotors = new SpeedControllerGroup(m_feederLeftMotor, m_feederRightMotor);
-
-    m_feederStopperSolenoid = new DoubleSolenoid(2, 3);
-
-    m_feederStopperStat = false;
+    m_feederStopperSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void feederUp() {
@@ -46,23 +37,11 @@ public class FeederSubsystem extends SubsystemBase {
 
   public void feederStopperUp() {
     m_feederStopperSolenoid.set(DoubleSolenoid.Value.kForward);
-    m_feederStopperStat = true;
   }
   public void feederStopperDown() {
     m_feederStopperSolenoid.set(DoubleSolenoid.Value.kReverse);
-    m_feederStopperStat = false;
   }
-  public void feederStopperUpDown() {
-    m_feederStopperStat = !m_feederStopperStat;
-
-    if (m_feederStopperStat) {
-      feederStopperUp();
-    }
-    else {
-      feederStopperDown();
-    }
-  }
-
+  
   @Override
   public void periodic() {
   }
