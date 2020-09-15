@@ -29,13 +29,13 @@ public class ShooterSubsystem extends PIDSubsystem {
 
     m_shooterEncoder.setDistancePerPulse/*revolutionPerPulse*/(Constants.EncoderConstants.ShooterEncoderConstants.kShooterEncoderRPP);
 
-    setSetpoint(0);
+    setSetpoint(20);
   }
 
   @Override
   protected void useOutput(double PIDOutput, double setpoint) {
-    m_shooterLeftMotor.setVoltage(FFOutput() + PIDOutput);
-    m_shooterRightMotor.setVoltage(-FFOutput() - PIDOutput);
+    m_shooterLeftMotor.setVoltage(m_FFController.calculate(/*velocity*/setpoint, /*acceleration*/0) + PIDOutput);
+    m_shooterRightMotor.setVoltage(-m_FFController.calculate(/*velocity*/setpoint, /*acceleration*/0) - PIDOutput);
   }
 
   @Override
