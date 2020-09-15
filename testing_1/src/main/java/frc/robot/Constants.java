@@ -64,21 +64,20 @@ public final class Constants {
 
   public static final class EncoderConstants {
     //encoder distance per pulse
-    //DPR=distance per revolution, CPR=counts per revolution, DPP=distance per pulse, GR=gear ratio
     
     public static final class DriveEncoderConstants {
+      //DPR=distancePerRevolution, CPR=countsPerRevolution, DPP=distancePerPulse, GR=gearRatio
       public static final double kDriveEncoderDPR = 6 * Math.PI;
       public static final double kDriveEncoderCPR = 256;
-      //public static final double kDriveGearBoxGR = ?;
-      public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) /** kDriveGearBoxGR*/;
+      public static final double kDriveGR = 336.0 / 250.0;
+      public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) * kDriveGR;
     }
     
     public static final class ShooterEncoderConstants {
-      //TODO
-      //public static final double kShooterEncoderDPR = ?;
+      //CPR=countsPerRevolution, GR=gearRatio, RPP=revolutionPerPulse
       public static final double kShooterEncoderCPR = 256;
-      //public static final double kShooterGearBoxGR = ?;
-      //public static final double kShooterEncoderDPP = (kShooterEncoderDPR / kShooterEncoderCPR) /** kShooterGearBoxGR*/;
+      public static final double kShooterGR = 16.0 / 22.0;
+      public static final double kShooterEncoderRPP = (1 / kShooterEncoderCPR) * kShooterGR;
     }
   }
 

@@ -27,8 +27,7 @@ public class ShooterSubsystem extends PIDSubsystem {
   public ShooterSubsystem() {
     super (new PIDController(Constants.PIDConstants.ShooterSubsystem.kP, Constants.PIDConstants.ShooterSubsystem.kI, Constants.PIDConstants.ShooterSubsystem.kD));
 
-    //TODO set below
-    /*m_shooterEncoder.setDistancePerPulse();*/
+    m_shooterEncoder.setDistancePerPulse/*revolutionPerPulse*/(Constants.EncoderConstants.ShooterEncoderConstants.kShooterEncoderRPP);
 
     setSetpoint(0);
   }
