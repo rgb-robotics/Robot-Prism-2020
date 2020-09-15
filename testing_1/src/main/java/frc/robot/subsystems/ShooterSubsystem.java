@@ -42,12 +42,4 @@ public class ShooterSubsystem extends PIDSubsystem {
   protected double getMeasurement() {
     return m_shooterEncoder.getRate();
   }
-
-  public double FFOutput() {
-    return m_FFController.calculate(/*velocity*/0, /*acceleration*/0);
-  }
-
-  @Override
-  public void periodic() {
-  }
 }
