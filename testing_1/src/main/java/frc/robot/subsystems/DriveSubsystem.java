@@ -39,13 +39,18 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void drive(double speed, double rotation, double throttle) {
     double scale = (throttle * -0.125) + 0.675;
-    
+    System.out.println(getDistanceDriven());
+    if (getDistanceDriven() >= 50) {
+      speed = 0;
+      rotation =0;
+    }
     m_drive.arcadeDrive(speed * scale, rotation * scale);
   }
 
   public double getDistanceDriven() {
-    double distanceDriven = m_driveLeftEncoder.getDistance();
+    //double distanceDriven = m_driveLeftEncoder.getDistance();
     //double distanceDriven = (m_driveLeftEncoder.getDistance() + m_driveRightEncoder.getDistance()) / 2;
+    double distanceDriven = m_driveRightEncoder.getDistance();
 
     return distanceDriven;
   }
