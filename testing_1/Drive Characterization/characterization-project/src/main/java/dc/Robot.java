@@ -71,7 +71,6 @@ public class Robot extends TimedRobot {
     Spark leftMotor1 = new Spark(1);
 
     Spark rightMotor1 = new Spark(4);
-    rightMotor1.setInverted(true);
 
     SpeedController[] leftMotors = new SpeedController[2];
     leftMotors[0] = new Spark(2);
@@ -79,9 +78,7 @@ public class Robot extends TimedRobot {
 
     SpeedController[] rightMotors = new SpeedController[2];
     rightMotors[0] = new Spark(5);
-    rightMotors[0].setInverted(true);
     rightMotors[1] = new Spark(6);
-    rightMotors[1].setInverted(true);
 
     //
     // Configure gyro

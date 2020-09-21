@@ -17,7 +17,7 @@
     # Inversions for the left-side motors
     "leftMotorsInverted": [False, False, False],
     # Inversions for the right side motors
-    "rightMotorsInverted": [True, True, True],
+    "rightMotorsInverted": [False, False, False],
     # Wheel diameter (in units of your choice - will dictate units of analysis)
     "wheelDiameter": 6,
     # If your robot has only one encoder, set all right encoder fields to `None`
@@ -45,5 +45,7 @@
     # "" (NavX using default SPI, ADXRS450 using onboard CS0, or no gyro)
     "gyroPort": "",
 }
+
+
 
 
