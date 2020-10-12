@@ -38,6 +38,7 @@ public class DriveSubsystem_FF extends SubsystemBase {
   public DriveSubsystem_FF() {
     m_driveLeftEncoder.setDistancePerPulse(Constants.EncoderConstants.DriveEncoderConstants.kDriveEncoderDPP);
     m_driveRightEncoder.setDistancePerPulse(Constants.EncoderConstants.DriveEncoderConstants.kDriveEncoderDPP);
+    resetEncoders();
   }
 
   public void arcadeDrive(double speed, double rotation, double throttle) {
@@ -58,8 +59,7 @@ public class DriveSubsystem_FF extends SubsystemBase {
 
 
   public double getDistanceDriven() {
-    double distanceDriven = m_driveLeftEncoder.getDistance();
-    //double distanceDriven = (m_driveLeftEncoder.getDistance() + m_driveRightEncoder.getDistance()) / 2;
+    double distanceDriven = (m_driveLeftEncoder.getDistance() + m_driveRightEncoder.getDistance()) / 2;
 
     return distanceDriven;
   }

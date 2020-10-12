@@ -70,7 +70,7 @@ public final class Constants {
       public static final double kDriveEncoderDPR = 6 * Math.PI;
       public static final double kDriveEncoderCPR = 256;
       public static final double kDriveGR = 336.0 / 250.0;
-      public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) * kDriveGR;
+      public static final double kDriveEncoderDPP = (kDriveEncoderDPR / kDriveEncoderCPR) * kDriveGR /*inch*/;
     }
     
     public static final class ShooterEncoderConstants {
@@ -84,9 +84,9 @@ public final class Constants {
   public static final class PIDConstants {
     //kP, kI, kD
     public static final class DriveSubsystem {
-      public static final double kP = 0;
+      public static final double kP = 0.0615;
       public static final double kI = 0;
-      public static final double kD = 0;
+      public static final double kD = 0.0403;
     }
     public static final class ShooterSubsystem {
       public static final double kP = 1;
@@ -98,14 +98,28 @@ public final class Constants {
   public static final class FeedforwardConstants {
     //kS, kV, kA
     public static final class DriveSubsystem {
-      public static final double kS = 0;
-      public static final double kV = 0;
-      public static final double kA = 0;
+      public static final double kS = 2.22;
+      public static final double kV = 0.00192;
+      public static final double kA = 0.000813;
     }
     public static final class ShooterSubsystem {
       public static final double kS = 1;
       public static final double kV = 1;
       public static final double kA = 1;
+    }
+  }
+
+  public static final class SubsystemConstraints {
+    //maxV=maxVelocity, maxA=maxAcceleration
+    //These constriants only apply to "when 12Volts is  applied", not taking other factors into account.
+    //TODO Put in ones that are tested when free
+    public static final class DriveSubsystem {
+      public static final double maxV = 12/FeedforwardConstants.DriveSubsystem.kV;
+      public static final double maxA = 12/FeedforwardConstants.DriveSubsystem.kA;
+    }
+    public static final class ShooterSubsystem {
+      public static final double maxV = 12/FeedforwardConstants.ShooterSubsystem.kV;
+      public static final double maxA = 12/FeedforwardConstants.ShooterSubsystem.kA;
     }
   }
 }

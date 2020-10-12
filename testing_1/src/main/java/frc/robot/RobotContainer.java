@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-import frc.robot.subsystems.DriveSubsystem;
-//import frc.robot.subsystems.DriveSubsystem_FF;
+//import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.DriveSubsystem_FF;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.FeederSubsystem;
@@ -45,19 +45,19 @@ public class RobotContainer {
   public static final XboxController m_controller = new XboxController(Constants.OIPorts.kControllerPort);
 
   //The robot's subsystems are declared here.
-  private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  //private static final DriveSubsystem_FF m_driveSubsystem_FF = new DriveSubsystem_FF();
+  //private static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  private static final DriveSubsystem_FF m_driveSubsystem_FF = new DriveSubsystem_FF();
   private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private static final FeederSubsystem m_feederSubsystem = new FeederSubsystem();
   private static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   //private static final ShooterSubsystemForTesting m_shooterSubsystemForTesting = new ShooterSubsystemForTesting();
 
   //The robot's commands are declared here.
-  //private static final RunCommand m_arcadeDrive = new RunCommand(() -> m_driveSubsystem_FF.arcadeDrive(-m_stick.getY(), m_stick.getX(), m_stick.getThrottle()), m_driveSubsystem_FF);
+  private static final RunCommand m_arcadeDrive = new RunCommand(() -> m_driveSubsystem_FF.arcadeDrive(-m_stick.getY(), m_stick.getX(), m_stick.getThrottle()), m_driveSubsystem_FF);
   //private static final SequentialCommandGroup m_driveDistanceCommandPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem::resetEncoders, m_driveSubsystem), new PIDCommand(new PIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD), m_driveSubsystem::getDistanceDriven, 24, output -> m_driveSubsystem.drive(output, 0, -1), m_driveSubsystem));
   //private static final SequentialCommandGroup m_driveDistanceCommandMPPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem::resetEncoders, m_driveSubsystem), new ProfiledPIDCommand(new ProfiledPIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD, new TrapezoidProfile.Constraints(0, 0)), m_driveSubsystem::getDistanceDriven, 24, (output, setpoint) -> m_driveSubsystem.drive(output, 0, -1), m_driveSubsystem));
   //private static final SequentialCommandGroup m_driveDistanceCommandPID = new SequentialCommandGroup(new InstantCommand(m_driveSubsystem_FF::resetEncoders, m_driveSubsystem_FF), new PIDCommand(new PIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD), m_driveSubsystem_FF::getDistanceDriven, 24, output -> m_driveSubsystem_FF.arcadeDrive(output, 0, -1), m_driveSubsystem_FF));
-  ///private static final SequentialCommandGroup m_driveDistanceCommandMPPID = new ProfiledPIDCommand(new ProfiledPIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD, new TrapezoidProfile.Constraints(0, 0)), m_driveSubsystem_FF::getDistanceDriven, 24, (output, setpoint) -> m_driveSubsystem_FF.voltageDrive(m_driveSubsystem_FF.FFOutput(setpoint) + output, -m_driveSubsystem_FF.FFOutput(setpoint) - output), m_driveSubsystem_FF).beforeStarting(m_driveSubsystem_FF::resetEncoders, m_driveSubsystem_FF);
+  private static final SequentialCommandGroup m_driveDistanceCommandMPPID = new ProfiledPIDCommand(new ProfiledPIDController(Constants.PIDConstants.DriveSubsystem.kP, Constants.PIDConstants.DriveSubsystem.kI, Constants.PIDConstants.DriveSubsystem.kD, new TrapezoidProfile.Constraints(Constants.SubsystemConstraints.DriveSubsystem.maxV, Constants.SubsystemConstraints.DriveSubsystem.maxA)), m_driveSubsystem_FF::getDistanceDriven, 36 /*inch*/, (output, setpoint) -> m_driveSubsystem_FF.voltageDrive(m_driveSubsystem_FF.FFOutput(setpoint) + output, -m_driveSubsystem_FF.FFOutput(setpoint) - output), m_driveSubsystem_FF).beforeStarting(m_driveSubsystem_FF::resetEncoders, m_driveSubsystem_FF);
   private static final StartEndCommand m_intakeRunStop = new StartEndCommand(m_intakeSubsystem::intakeRun, m_intakeSubsystem::intakeStop, m_intakeSubsystem);
   private static final StartEndCommand m_intakeDownUp = new StartEndCommand(m_intakeSubsystem::intakeDown, m_intakeSubsystem::intakeUp, m_intakeSubsystem);
   private static final StartEndCommand m_feederUp = new StartEndCommand(m_feederSubsystem::feederUp, m_feederSubsystem::feederStop, m_feederSubsystem);
@@ -78,9 +78,9 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, () -> -m_stick.getY(), () -> m_stick.getX(), () -> m_stick.getThrottle()));
+    //m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, () -> -m_stick.getY(), () -> m_stick.getX(), () -> m_stick.getThrottle()));
     //TODO If the RunCommand below works, then delete the DriveCommand. And then initializes the command instead of anonymous.
-    //m_driveSubsystem_FF.setDefaultCommand(m_arcadeDrive);
+    m_driveSubsystem_FF.setDefaultCommand(m_arcadeDrive);
   
     configureButtonBindings();
   }
@@ -105,7 +105,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     //return m_driveDistanceCommandPID;
-    ///return m_driveDistanceCommandMPPID;
-    return m_feederDown;
+    return m_driveDistanceCommandMPPID;
   }
 }

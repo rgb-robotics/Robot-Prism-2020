@@ -42,7 +42,7 @@ public class DriveSubsystem extends SubsystemBase {
     System.out.println(getDistanceDriven());
     if (getDistanceDriven() >= 50) {
       speed = 0;
-      rotation =0;
+      rotation = 0;
     }
     m_drive.arcadeDrive(speed * scale, rotation * scale);
   }
