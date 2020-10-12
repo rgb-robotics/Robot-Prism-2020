@@ -114,8 +114,8 @@ public final class Constants {
     //These constriants only apply to "when 12Volts is  applied", not taking other factors into account.
     //TODO Put in ones that are tested when free
     public static final class DriveSubsystem {
-      public static final double maxV = 12/FeedforwardConstants.DriveSubsystem.kV;
-      public static final double maxA = 12/FeedforwardConstants.DriveSubsystem.kA;
+      public static final double maxV = 0.1 /*12/FeedforwardConstants.DriveSubsystem.kV*/;
+      public static final double maxA = 0.1 /*12/FeedforwardConstants.DriveSubsystem.kA*/;
     }
     public static final class ShooterSubsystem {
       public static final double maxV = 12/FeedforwardConstants.ShooterSubsystem.kV;
