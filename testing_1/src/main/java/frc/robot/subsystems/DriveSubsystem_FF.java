@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -45,6 +46,8 @@ public class DriveSubsystem_FF extends SubsystemBase {
     double scale = (throttle * -0.125) + 0.675;
     
     m_drive.arcadeDrive(speed * scale, rotation * scale);
+    SmartDashboard.putNumber("leftDistanceDriven", m_driveLeftEncoder.getDistance());
+    SmartDashboard.putNumber("rightDistanceDriven", m_driveRightEncoder.getDistance());
   }
 
   public void voltageDrive(double leftVoltage, double rightVoltage) {
@@ -61,6 +64,7 @@ public class DriveSubsystem_FF extends SubsystemBase {
   public double getDistanceDriven() {
     double distanceDriven = (m_driveLeftEncoder.getDistance() + m_driveRightEncoder.getDistance()) / 2;
 
+    SmartDashboard.putNumber("distanceDriven", distanceDriven);
     return distanceDriven;
   }
 
